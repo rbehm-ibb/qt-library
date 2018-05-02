@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>network_incoming.png</file>
+        <file>network_traffic.png</file>
+        <file>zoomout.png</file>
+        <file>zoomin.png</file>
+    </qresource>
+</RCC>

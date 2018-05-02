@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/fileselector/">
+        <file>fileopen.svgz</file>
+        <file>eye.png</file>
+    </qresource>
+</RCC>

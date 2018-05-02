@@ -1,5 +1,1 @@
-// ******************************************************
-// * copyright (C) %YEAR% by Reinhardt Behm/rbehm@hushmail.com
-// * All Rights reserved
-// * created %DATE% by %USER%
-// ******************************************************
+/home/behm/dvlsw/templateQt5/template-rb.txt

@@ -1,0 +1,10 @@
+Makefile
+*.pro.user
+.build
+bin
+*.o
+CVS
+
+# Precompiled Headers
+*.gch
+*.pch

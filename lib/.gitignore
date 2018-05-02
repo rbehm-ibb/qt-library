@@ -1,0 +1,7 @@
+.cvsignore
+.directory
+*~
+CVS
+qcustomplot*
+osmview-*
+qt-snippets

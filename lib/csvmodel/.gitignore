@@ -1,0 +1,4 @@
+.cvsignore
+.directory
+bin
+CVS

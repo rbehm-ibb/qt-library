@@ -1,0 +1,12 @@
+AbstractScale {
+	color: white;
+/*	border-radius: 2px; */
+/*	border: 1px solid white; */
+	background-color: black;
+}
+AbstractScale QLabel {
+	color: white;
+	border-radius: 2px;
+	border: 1px solid white;
+	background-color: black;
+}
