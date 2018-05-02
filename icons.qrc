@@ -1,0 +1,16 @@
+<RCC>
+    <qresource prefix="/">
+	<file>icons_famfam/scalable/actions/wizard.svgz</file>
+	<file>icons_famfam/exit.png</file>
+	<file>icons_famfam/help.png</file>
+	<file>icons_famfam/star.png</file>
+	<file>icons_famfam/table_add.png</file>
+	<file>icons_famfam/table_refresh.png</file>
+	<file>icons_famfam/table_row_delete.png</file>
+	<file>icons_famfam/table_row_insert.png</file>
+	<file>icons_famfam/tick.png</file>
+	<file>icons_famfam/zoom_in.png</file>
+	<file>icons_famfam/zoom_out.png</file>
+	<file>icons_famfam/zoom.png</file>
+    </qresource>
+</RCC>
