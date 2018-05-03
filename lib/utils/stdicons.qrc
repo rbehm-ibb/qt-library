@@ -24,7 +24,6 @@
         <file alias="zoom-out">stdicons/zoom_out.png</file>
         <file alias="rotate-ccw">stdicons/rotate_ccw.svgz</file>
         <file alias="rotate-cw">stdicons/rotate_cw.svgz</file>
-        <file>stdicons/locationbar_erase.png</file>
         <file alias="config">stdicons/wrench_orange.png</file>
         <file>stdicons/add.png</file>
         <file>stdicons/delete.png</file>

@@ -1,0 +1,9 @@
+.cvsignore
+.directory
+*~
+CVS
+unused
+bin
+*.pro.user
+Makefile
+.build
