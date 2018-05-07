@@ -73,6 +73,12 @@ void Config::setValue(const char *key, const QString &value)
 	setValue(QString::fromLatin1(key), value);
 }
 
+void Config::setValue(const char *key, const char *value)
+{
+	setValue(QString::fromLatin1(key), QString::fromLatin1(value));
+
+}
+
 void Config::setValue(const QString &key, const QString &value)
 {
 	if (i()->conf()->value(key).toString() != value)

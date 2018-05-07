@@ -33,6 +33,7 @@ public:
 	static void setValue(const char *key, const QByteArray d) { setValue(key, QVariant(d)); }
 	static void setValue(const QString &key, const QString &value);
 	static void setValue(const char *key, const QString &value);
+	static void setValue(const char *key, const char *value);
 	static void setValue(const QString &key, const int value);
 	static void setValue(const char *key, const int value);
 
