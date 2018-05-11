@@ -82,7 +82,6 @@ void MainWindow::open()
 
 void MainWindow::about()
 {
-	char year[] = "2016";
 	QString text("<h1>%1</h1>"
 		     "<p>Version %2"
 		     "<p>&copy; %3, %4"
@@ -93,7 +92,7 @@ void MainWindow::about()
 	text = text
 		.arg(qApp->applicationName())
 		.arg(qApp->applicationVersion())
-		.arg(year)
+		.arg(QString(__DATE__).section(' ', -1, -1))
 		.arg(qApp->organizationName())
 		.arg(qApp->organizationDomain())
 		.arg(qVersion())
