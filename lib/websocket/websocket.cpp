@@ -13,7 +13,7 @@ WebSocket::WebSocket(WebResource *rsc, QWebSocket *socket, QObject *parent)
 	, socketCreated(false)
 	, m_rsc(rsc)
 	, m_socket(socket)
-	, m_hash(QCryptographicHash::Sha3_512)
+	, m_hash(QCryptographicHash::Md5)
 	, m_connectTimer(nullptr)
 {
 	setObjectName(rsc->objectName());
@@ -32,7 +32,7 @@ WebSocket::WebSocket(WebResource *rsc, const QString origin, const QString host,
 	, m_origin(origin)
 	, m_host(host)
 	, m_port(port)
-	, m_hash(QCryptographicHash::Sha3_512)
+	, m_hash(QCryptographicHash::Md5)
 	, m_connectTimer(0)
 {
 	setObjectName(rsc->objectName());
