@@ -30,5 +30,8 @@
         <file alias="exit">stdicons/exit.png</file>
         <file alias="fileopen">stdicons/document-open.png</file>
         <file>stdicons/arrow_refresh.png</file>
+        <file>stdicons/edit-copy.png</file>
+        <file>stdicons/edit-cut.png</file>
+        <file>stdicons/edit-paste.png</file>
     </qresource>
 </RCC>
