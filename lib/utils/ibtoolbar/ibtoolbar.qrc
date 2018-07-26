@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/"/>
+    <qresource prefix="/toolbarspacer">
+        <file>info.svgz</file>
+        <file>exit.svgz</file>
+        <file>qt-logo-about.png</file>
+    </qresource>
+</RCC>
