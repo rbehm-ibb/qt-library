@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/ibtoolbar">
+        <file>logo.png</file>
+    </qresource>
+</RCC>
