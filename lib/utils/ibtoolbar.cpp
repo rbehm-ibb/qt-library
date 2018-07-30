@@ -56,7 +56,7 @@ void IBToolBar::addQuit()
 	{
 		// TODO: how can this action be made this first in the toolbar?
 		m_quit = addAction(QIcon(":/toolbarspacer/exit.svgz"), tr("Exit"), mw, SLOT(quit()));
-		m_quit->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_Q));
+		m_quit->setShortcut(QKeySequence::Quit);
 		m_quit->setObjectName("Quit-Action");
 	}
 	else
