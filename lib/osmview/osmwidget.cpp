@@ -42,8 +42,23 @@ OsmWidget::OsmWidget(QWidget *parent)
 //	m_scale = new MapScaleWidget(m_osmView);
 //	m_scale->move(0, 0);
 //	connect(m_osmView, &OsmView::changedTransform, m_scale, &MapScaleWidget::changedScale);
-//	m_osmView->setZoom(5);
-//	setHome(QPointF(-8.818392, 17.49625));
+
+#if 0
+	QWidget *p = this;
+	while (p && p->parent())
+	{
+		p = p->parentWidget();
+	}
+	qDebug() << Q_FUNC_INFO << p;
+	QMainWindow *mw = qobject_cast<QMainWindow*>(p);
+	if (mw)
+	{
+		mw->statusBar()->addPermanentWidget(posLabel());
+		mw->statusBar()->addPermanentWidget(m_mapHost);
+		mw->statusBar()->addPermanentWidget(new QLabel(copyright()));
+
+	}
+#endif
 }
 
 //QGraphicsScene *OsmWidget::scene()
@@ -69,6 +84,11 @@ void OsmWidget::setPath(QString path)
 void OsmWidget::setFetchTiles(bool fetchTiles)
 {
 	OsmTile::setFetchTiles(fetchTiles);
+}
+
+bool OsmWidget::fetchTiles()
+{
+	return OsmTile::fetchTiles();
 }
 
 QString OsmWidget::copyright() const
@@ -142,7 +162,7 @@ void OsmWidget::goHome()
 
 void OsmWidget::mapHostActive(bool on)
 {
-//	qDebug() << Q_FUNC_INFO << on;
+//	qDebug() << Q_FUNC_INFO << m_mapHost << on;
 	m_mapHost->setPixmap(QPixmap(on ? ":/network_incoming.png" : ":/network_traffic.png"));
 }
 

@@ -29,6 +29,10 @@ void MainWindow::on_actionSetup_triggered()
 class OsmWidget : public QWidget
 {
 	Q_OBJECT
+	Q_PROPERTY(int zoom READ zoom WRITE setZoom)
+	Q_PROPERTY(QString tileserver READ tileserver WRITE setTileserver)
+	Q_PROPERTY(QPointF center READ center WRITE setCenter NOTIFY centerChanged)
+	Q_PROPERTY(bool fetchTiles READ fetchTiles WRITE setFetchTiles)
 public:
 	explicit OsmWidget(QWidget *parent = 0);
 	OsmView *view() const { return m_osmView; }
@@ -36,6 +40,7 @@ public:
 	void addItem(QGraphicsItem *item);
 	static void setPath(QString path);
 	static void setFetchTiles(bool fetchTiles);
+	static bool fetchTiles();
 	QToolBar *toolBar() const { return m_toolbar; }
 	QLabel *mapHostLabel() const { return m_mapHost; }
 	QString copyright() const;
