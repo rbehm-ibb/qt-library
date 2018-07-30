@@ -1,0 +1,6 @@
+.cvsignore
+.directory
+*~
+CVS
+test
+doc
