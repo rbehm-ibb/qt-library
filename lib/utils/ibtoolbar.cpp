@@ -73,7 +73,7 @@ void IBToolBar::aboutSlot()
 		     "<p>&copy; %3, %4"
 		     "<p>Web: <a href=\"http://%5\">http://%5</a>"
 		     "<p>Mail: <a href=\"mailto:info@%5\">info@%5</a>"
-		     "<p>Using  <img src=\":/toolbarspacer/qt-logo-about.png\"> %6"
+		     "<p>Using  <img src=\":/qt-project.org/qmessagebox/images/qtlogo-64.png\"> %6"
 		     );
 	text = text
 		.arg(qApp->applicationName())
@@ -84,4 +84,5 @@ void IBToolBar::aboutSlot()
 		.arg(qVersion())
 		;
 	QMessageBox::about(parentWidget(), qApp->applicationName(), text);
+//	":/qt-project.org/qmessagebox/images/qtlogo-64.png"
 }
