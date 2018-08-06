@@ -3,10 +3,9 @@
 // * All Rights reserved
 // ******************************************************
 
-#include "project.h"
 #include "commsocket.h"
 
-const QString CommSocket::m_prefix("BETL.AvioScout-");
+const QString CommSocket::m_prefix("IBB.CommSocket-");
 
 CommSocket::CommSocket(QString name, QObject *parent)
 	: QLocalSocket(parent)
@@ -83,12 +82,6 @@ void CommSocket::setTimeout(int time)
 		m_watchDogTimer = new QTimer(this);
 		connect(m_watchDogTimer, &QTimer::timeout, this, &CommSocket::watchDogTimeout);
 		connect(this, SIGNAL(watchDogReset()), m_watchDogTimer, SLOT(start()));
-//		if (m_name != "mcu" && m_name != "gps")
-//		{
-//			connect(m_watchDogTimer, SIGNAL(timeout()), this, SLOT(catchWdTimeout()));
-//			connect(this, SIGNAL(watchDogReset()), this, SLOT(catchWdReset()));
-//			connect(this, SIGNAL(dataRxd(int,QByteArray)), this, SLOT(catchPacket(int,QByteArray)));
-//		}
 	}
 	m_watchDogTimer->setInterval(time);
 	m_watchDogTimer->start();

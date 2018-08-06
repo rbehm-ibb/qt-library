@@ -6,7 +6,6 @@
 #ifndef COMMSERVER_H
 #define COMMSERVER_H
 
-#include "project.h"
 #include "commsocket.h"
 
 class CommSocket;

@@ -6,8 +6,6 @@
 #ifndef COMMSOCKET_H
 #define COMMSOCKET_H
 
-#include "project.h"
-
 /// \brief Socket for communication between processes, Works together with CommServer.
 ///
 /// It uses QLocalSocket inside and allows transfer of data blocks.

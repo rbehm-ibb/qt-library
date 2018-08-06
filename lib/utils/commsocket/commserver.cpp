@@ -3,7 +3,6 @@
 // * All Rights reserved
 // ******************************************************
 
-#include "project.h"
 #include "commserver.h"
 #include "commsocket.h"
 
@@ -65,7 +64,9 @@ void CommServer::disconnectedSlot()
 {
 	CommSocket * socket = qobject_cast<CommSocket *>(sender());
 	if (socket)
+	{
 		socket->deleteLater();
+	}
 //	qDebug() << Q_FUNC_INFO << serverName() << fullServerName();
 	emit disconnectedSignal();
 }
