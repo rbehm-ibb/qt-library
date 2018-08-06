@@ -47,6 +47,12 @@ void IBToolBar::addAbout()
 	addWidget(tbs);
 	m_about = addAction(QIcon(":/toolbarspacer/info.svgz"), tr("&About"));
 	QObject::connect(m_about, &QAction::triggered, this, &IBToolBar::aboutSlot);
+	QMainWindow *mw = qobject_cast<QMainWindow*>(parentWidget());
+	if (mw)
+	{
+		mw->setWindowTitle(QString("%1 %2").arg(qApp->applicationName()).arg(qApp->applicationVersion()));
+
+	}
 }
 
 void IBToolBar::addQuit()
@@ -54,7 +60,6 @@ void IBToolBar::addQuit()
 	QMainWindow *mw = qobject_cast<QMainWindow*>(parentWidget());
 	if (mw)
 	{
-		// TODO: how can this action be made this first in the toolbar?
 		m_quit = addAction(QIcon(":/toolbarspacer/exit.svgz"), tr("Exit"), mw, SLOT(quit()));
 		m_quit->setShortcut(QKeySequence::Quit);
 		m_quit->setObjectName("Quit-Action");
@@ -68,9 +73,15 @@ void IBToolBar::addQuit()
 
 void IBToolBar::aboutSlot()
 {
+	QVariant copyr = qApp->property("copyright-icon");
+	QString copyIcon;
+	if (copyr.isValid())
+	{
+		copyIcon =  "<img src=\"" + copyr.toString() + "\">";
+	}
 	QString text("<h1>%1</h1>"
 		     "<p>Version %2"
-		     "<p>&copy; %3, %4"
+		     "<p>&copy; %3, %7 %4"
 		     "<p>Web: <a href=\"http://%5\">http://%5</a>"
 		     "<p>Mail: <a href=\"mailto:info@%5\">info@%5</a>"
 		     "<p>Using  <img src=\":/qt-project.org/qmessagebox/images/qtlogo-64.png\"> %6"
@@ -82,7 +93,7 @@ void IBToolBar::aboutSlot()
 		.arg(qApp->organizationName())
 		.arg(qApp->organizationDomain())
 		.arg(qVersion())
+		.arg(copyIcon)
 		;
 	QMessageBox::about(parentWidget(), qApp->applicationName(), text);
-//	":/qt-project.org/qmessagebox/images/qtlogo-64.png"
 }
