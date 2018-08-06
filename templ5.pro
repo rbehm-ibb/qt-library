@@ -13,6 +13,7 @@ include( $$[PRTEMPLATE]/lib/utils/ibtoolbar.pri )
 include( $$[PRTEMPLATE]/lib/utils/ledicon/ledicon.pri )
 include( $$[PRTEMPLATE]/lib/utils/filetextstream/filetextstream.pri )
 include( $$[PRTEMPLATE]/lib/serialport/ibserialport.pri )
+include( $$[PRTEMPLATE]/lib/utils/commsocket/commserver.pri )
 
 QT += core gui widgets
 
