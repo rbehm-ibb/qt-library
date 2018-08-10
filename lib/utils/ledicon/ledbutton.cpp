@@ -7,6 +7,12 @@
 
 #include "ledbutton.h"
 
+LedButton::LedButton(QWidget *parent)
+	: QPushButton(parent)
+{
+	setLed(LedIconSource::Blue);
+}
+
 LedButton::LedButton(LedIconSource::LedColor color, const QString &text, QWidget *parent)
 	: QPushButton(text, parent)
 {
@@ -15,6 +21,7 @@ LedButton::LedButton(LedIconSource::LedColor color, const QString &text, QWidget
 
 void LedButton::setLed(LedIconSource::LedColor color)
 {
+	setCheckable(true);
 	m_color = color;
 	setIcon(LedIconSource::icon(color));
 }
