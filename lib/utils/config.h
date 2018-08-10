@@ -21,6 +21,7 @@ class Config : public QObject
 	Q_OBJECT
 public:
 	~Config();
+	static bool loadDefaults(const QString &cfgName = QString());
 	static QVariant value(const QString &key, const QVariant defaultValue = QVariant());
 	static QString stringValue(const QString &key, const QString &defaultValue = QString::null);
 	static QString stringValue(const char *key, const QString &defaultValue = QString::null);
@@ -56,6 +57,7 @@ private:
 	static Config *i();
 	static Config *instance;
 	explicit Config(QObject *parent = 0);
+	bool loadDefaultsInternal(const QString &cfgName);
 };
 
 #endif // CONFIG_H

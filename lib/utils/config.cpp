@@ -23,6 +23,44 @@ Config::~Config()
 	m_conf->sync();
 }
 
+bool Config::loadDefaults(const QString &cfgName)
+{
+	return i()->loadDefaultsInternal(cfgName);
+}
+
+bool Config::loadDefaultsInternal(const QString &cfgName)
+{
+//	qDebug() << Q_FUNC_INFO << cfgName;
+	QString name(cfgName);
+	if (name.isEmpty())
+	{
+		name = "defaults.rc";
+	}
+	QResource rsc(name);
+	if (! rsc.isValid())
+	{
+		qWarning() << Q_FUNC_INFO << rsc.absoluteFilePath() << "not found";
+		return false;
+	}
+//	qDebug() << Q_FUNC_INFO << rsc.absoluteFilePath() << rsc.isValid();
+	QSettings defs(rsc.absoluteFilePath(), QSettings::IniFormat);
+	if (defs.status() != QSettings::NoError)
+	{
+		qWarning() << Q_FUNC_INFO << defs.fileName() << "error:" << defs.status();
+		return false;
+	}
+//	qDebug() << Q_FUNC_INFO << defs.allKeys() << defs.fileName() << defs.status();
+	foreach (const QString &k, defs.allKeys())
+	{
+		if (! m_conf->contains(k))
+		{
+			m_conf->setValue(k, defs.value(k));
+		}
+	}
+	m_conf->sync();
+	return true;
+}
+
 QVariant Config::value(const QString &key, const QVariant defaultValue)
 {
 	if (! i()->m_conf->contains(key) && defaultValue.isValid())
