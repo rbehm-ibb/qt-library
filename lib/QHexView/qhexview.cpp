@@ -1,10 +1,3 @@
-#include <QScrollBar>
-#include <QPainter>
-#include <QSize>
-#include <QPaintEvent>
-#include <QKeyEvent>
-#include <QClipboard>
-#include <QApplication>
 #include "qhexview.h"
 
 const int HEXCHARS_IN_LINE = 47;
@@ -26,7 +19,7 @@ QHexView::QHexView(QWidget *parent)
 	m_posHex = 10 * m_charWidth + GAP_ADR_HEX;
 	m_posAscii = m_posHex + HEXCHARS_IN_LINE * m_charWidth + GAP_HEX_ASCII;
 
-	setMinimumWidth(m_posAscii + (BYTES_PER_LINE * m_charWidth));
+	setMinimumWidth(m_posAscii + (BYTES_PER_LINE * m_charWidth) + 20);	// FIXME +20 for scrollbar
 
 	setFocusPolicy(Qt::StrongFocus);
 }

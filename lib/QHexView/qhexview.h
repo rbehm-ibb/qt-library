@@ -1,8 +1,6 @@
-#ifndef Q_HEX_VIEWER_H_
-#define Q_HEX_VIEWER_H_
+#ifndef QHEXVIEW_H_
+#define QHEXVIEW_H_
 
-#include <QAbstractScrollArea>
-#include <QByteArray>
 
 class QHexView: public QAbstractScrollArea
 {
