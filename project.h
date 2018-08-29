@@ -11,6 +11,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <errno.h>
+#include <assert.h>
 #ifdef __cplusplus
 #include <iostream>
 using namespace std;
@@ -104,6 +105,19 @@ using namespace std;
 #ifdef QT_BLUETOOTH_LIB
 #include <QtBluetooth>
 #endif
+
+#ifdef QT_3DCORE_LIB
+#include <Qt3DCore>
+#endif
+
+#ifdef QT_3DRENDERER_LIB
+#include <Qt3DRenderer>
+#endif
+
+#ifdef QT_3DINPUT_LIB
+#include <Qt3DInput>
+#endif
+
 
 #ifdef QCUSTOM_PLOT
 #include "qcustomplot.h"

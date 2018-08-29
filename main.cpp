@@ -28,11 +28,14 @@ int main(int argc, char *argv[])
 		parser.process(app);
 	}
 	{
-		QFile sf(":/style.css");
+		QFile sf(":/styles.css");
 		sf.open(QIODevice::ReadOnly);
 		app.setStyleSheet(sf.readAll());
 	}
 	Config::loadDefaults();
+	SingleApp sapp;
+	MainWindow mw;
+	QObject::connect(&sapp, &SingleApp::kill, &mw, &MainWindow::quit);
 	MainWindow mw;
 	mw.show();
 	return app.exec();
