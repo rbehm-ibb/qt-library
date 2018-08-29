@@ -6,6 +6,7 @@
 
 #include "mainwindow.h"
 #include "config.h"
+#include "singleapp.h"
 
 int main(int argc, char *argv[])
 {
