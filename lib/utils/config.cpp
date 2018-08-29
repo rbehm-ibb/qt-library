@@ -57,6 +57,9 @@ bool Config::loadDefaultsInternal(const QString &cfgName)
 			m_conf->setValue(k, defs.value(k));
 		}
 	}
+	m_conf->setValue("defaults/date", QDateTime::currentDateTime().toString(Qt::RFC2822Date));
+	m_conf->setValue("defaults/name", qApp->applicationName());
+	m_conf->setValue("defaults/version", qApp->applicationVersion());
 	m_conf->sync();
 	return true;
 }
