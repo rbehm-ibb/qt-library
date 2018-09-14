@@ -22,8 +22,8 @@ HEADERS += \
 SOURCES +=  \
 
 RESOURCES += \
-    rsc.qrc
+    rsc/rsc.qrc
 
 DISTFILES += \
-    defaults.rc \
-    styles.css
+    rsc/defaults.rc \
+    rsc/styles.css
