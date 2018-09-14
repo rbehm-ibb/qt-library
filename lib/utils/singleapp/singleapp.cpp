@@ -32,6 +32,7 @@ SingleApp::SingleApp(bool kill, QObject *parent)
 		}
 		else
 		{
+			QMessageBox::critical(0, qApp->applicationName(), "Another instance is running.");
 			exit(1);
 		}
 	}
