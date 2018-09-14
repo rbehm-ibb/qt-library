@@ -37,7 +37,6 @@ int main(int argc, char *argv[])
 	SingleApp sapp;
 	MainWindow mw;
 	QObject::connect(&sapp, &SingleApp::kill, &mw, &MainWindow::quit);
-	MainWindow mw;
 	mw.show();
 	return app.exec();
 }
