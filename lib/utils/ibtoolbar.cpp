@@ -45,7 +45,8 @@ void IBToolBar::addAbout()
 	QWidget *tbs = new QWidget;
 	tbs->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Preferred);
 	addWidget(tbs);
-	m_about = addAction(QIcon(":/toolbarspacer/info.svgz"), tr("&About"));
+//	m_about = addAction(QIcon(":/toolbarspacer/info.svgz"), tr("&About"));
+	m_about = addAction(QIcon(":/qt-project.org/styles/commonstyle/images/fileinfo-32.png"), tr("&About"));
 	QObject::connect(m_about, &QAction::triggered, this, &IBToolBar::aboutSlot);
 	QMainWindow *mw = qobject_cast<QMainWindow*>(parentWidget());
 	if (mw)
@@ -84,7 +85,7 @@ void IBToolBar::aboutSlot()
 		     "<p>&copy; %3, %7 %4"
 		     "<p>Web: <a href=\"http://%5\">http://%5</a>"
 		     "<p>Mail: <a href=\"mailto:info@%5\">info@%5</a>"
-		     "<p>Using  <img src=\":/qt-project.org/qmessagebox/images/qtlogo-64.png\"> %6"
+		     "<p>Using  <img src=\":/stdicons/qt-logo-about.png\"> %6"
 		     );
 	text = text
 		.arg(qApp->applicationName())
