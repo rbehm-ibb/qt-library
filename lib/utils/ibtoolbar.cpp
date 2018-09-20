@@ -78,7 +78,7 @@ void IBToolBar::aboutSlot()
 	QString copyIcon;
 	if (copyr.isValid())
 	{
-		copyIcon =  "<img src=\"" + copyr.toString() + "\">";
+		copyIcon =  "<img height=20 src=\"" + copyr.toString() + "\">";
 	}
 	QString text("<h1>%1</h1>"
 		     "<p>Version %2"
