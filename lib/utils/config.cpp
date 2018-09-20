@@ -103,7 +103,7 @@ int Config::intValue(const char *key, int defaultValue)
 
 void Config::setValue(const QString &key, const QVariant value)
 {
-	if (i()->conf()->value(key) != value)
+	if (! i()->conf()->contains(key) || (i()->conf()->value(key) != value))
 	{
 		i()->m_conf->setValue(key, value);
 	}
@@ -122,7 +122,7 @@ void Config::setValue(const char *key, const char *value)
 
 void Config::setValue(const QString &key, const QString &value)
 {
-	if (i()->conf()->value(key).toString() != value)
+	if (! i()->conf()->contains(key) || (i()->conf()->value(key).toString() != value))
 	{
 		i()->m_conf->setValue(key, value);
 	}
@@ -130,7 +130,7 @@ void Config::setValue(const QString &key, const QString &value)
 
 void Config::setValue(const QString &key, const int value)
 {
-	if (i()->conf()->value(key).toInt() != value)
+	if (! i()->conf()->contains(key) || (i()->conf()->value(key).toInt() != value))
 	{
 		i()->m_conf->setValue(key, value);
 	}
