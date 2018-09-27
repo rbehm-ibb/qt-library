@@ -10,3 +10,4 @@ SOURCES +=  \
 
 RESOURCES += \
     $$PWD/ledicons.qrc
+QT += gui widgets
