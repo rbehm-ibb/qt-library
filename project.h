@@ -94,6 +94,10 @@ using namespace std;
 #include <QtMultimedia>
 #endif
 
+#ifdef QT_WEBKITWIDGETS_LIB
+#include <QWebView>
+#endif
+
 #ifdef QT_X11EXTRAS_LIB
 #include <QtX11Extras>
 #endif
