@@ -56,6 +56,7 @@ bool CsvTableModel::read(const QString dsn, bool withHeaders)
 
 bool CsvTableModel::save(const QString dsn, bool withHeaders)
 {
+	qDebug() << Q_FUNC_INFO << rowCount() << columnCount() << dsn ;
 	QFile f(dsn);
 	if (! f.open(QIODevice::WriteOnly | QIODevice::Truncate))
 	{
@@ -86,6 +87,7 @@ bool CsvTableModel::save(const QString dsn, bool withHeaders)
 
 bool CsvTableModel::append(const QString dsn)
 {
+	beginResetModel();
 	QFile f;
 	if (! open(f, dsn))
 	{
@@ -94,7 +96,50 @@ bool CsvTableModel::append(const QString dsn)
 	QTextStream s(&f);
 	readData(s);
 	setHeader(m_header, true);	// may need to expand it
+	endResetModel();
 	return true;
+}
+
+void CsvTableModel::append(QAbstractTableModel *model)
+{
+	beginResetModel();
+	//assumes that the structure is the same
+	if (m_data.isEmpty())	// take all from model
+	{
+		m_colCount = model->columnCount();
+		m_header.clear();
+		for (int col = 0; col < model->columnCount(); ++col)
+		{
+			m_header << model->headerData(col, Qt::Horizontal).toString();
+		}
+	}
+	for (int row = 0; row < model->rowCount(); ++row)
+	{
+		QStringList sl;
+		for (int col = 0; col < model->columnCount(); ++col)
+		{
+			QModelIndex idx(model->index(row, col));
+			QVariant d = model->data(idx);
+			if (! d.isValid() || ! d.canConvert(QVariant::String))
+			{
+				sl << QString();
+			}
+			else
+			{
+				switch (d.type())
+				{
+				case QVariant::ByteArray:
+					sl << QString();
+					break;
+				default:
+					sl << d.toString();
+				}
+			}
+		}
+		m_data.append(sl);
+		qDebug() << Q_FUNC_INFO << row << sl;
+	}
+	endResetModel();
 }
 
 bool CsvTableModel::open(QFile &f, const QString &name)

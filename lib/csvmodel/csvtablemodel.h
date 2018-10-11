@@ -17,6 +17,7 @@ public:
 	bool read(const QString dsn, bool withHeaders);
 	bool save(const QString dsn, bool withHeaders);
 	bool append(const QString dsn);
+	void append(QAbstractTableModel *model);
 	QString filename() const { return m_filename; }
 	void setHeader(const QStringList &h, bool fixCol);
 	void setSep(const QChar &sep) { m_sep = sep; }
