@@ -17,13 +17,15 @@ CsvTableModel::~CsvTableModel()
 {
 }
 
-bool CsvTableModel::read(const QString dsn, bool withHeaders)
+bool CsvTableModel::read(const QString dsn, Options options)
 {
 	auto saveHeader = m_header;
 	clear();
 	QFile f;
 	if (! open(f, dsn))
 	{
+		m_header = saveHeader;
+		m_colCount = m_header.size();
 		return false;
 	}
 	beginResetModel();
@@ -35,7 +37,7 @@ bool CsvTableModel::read(const QString dsn, bool withHeaders)
 		s.setCodec(m_codec.toLocal8Bit());
 	}
 	QStringList header;
-	if (withHeaders)
+	if (options & WithHeader)
 	{
 		QString line = s.readLine(1000);
 		if (line.isNull())
@@ -44,19 +46,18 @@ bool CsvTableModel::read(const QString dsn, bool withHeaders)
 			emit error(msg.arg(f.fileName()).arg(f.errorString()));
 			return false;
 		}
-		header = expandLine(line);
+		header = expandLine(line, true);
 		m_colCount = header.count();
-		setHeader(header, withHeaders);
+		setHeader(header, options & WithHeader);
 	}
-	readData(s);
+	readData(s, options);
 	endResetModel();
 	emit nameChanged(dsn);
 	return true;
 }
 
-bool CsvTableModel::save(const QString dsn, bool withHeaders)
+bool CsvTableModel::save(const QString dsn, Options options) const
 {
-	qDebug() << Q_FUNC_INFO << rowCount() << columnCount() << dsn ;
 	QFile f(dsn);
 	if (! f.open(QIODevice::WriteOnly | QIODevice::Truncate))
 	{
@@ -69,7 +70,7 @@ bool CsvTableModel::save(const QString dsn, bool withHeaders)
 	{
 		s.setCodec(m_codec.toLocal8Bit());
 	}
-	if (withHeaders)
+	if (options & WithHeader)
 	{
 		s << m_header.join(m_sep) << endl;
 	}
@@ -78,14 +79,21 @@ bool CsvTableModel::save(const QString dsn, bool withHeaders)
 		QStringList line;
 		for (int col = 0; col < columnCount(); ++col)
 		{
-			line += m_data[row][col];
+			if (options & Quoted)
+			{
+				line += "\"" + m_data[row][col] + "\"";
+			}
+			else
+			{
+				line += m_data[row][col];
+			}
 		}
 		s << line.join(m_sep) << endl;
 	}
 	return true;
 }
 
-bool CsvTableModel::append(const QString dsn)
+bool CsvTableModel::append(const QString dsn, Options options)
 {
 	beginResetModel();
 	QFile f;
@@ -94,7 +102,7 @@ bool CsvTableModel::append(const QString dsn)
 		return false;
 	}
 	QTextStream s(&f);
-	readData(s);
+	readData(s, options & Trim);
 	setHeader(m_header, true);	// may need to expand it
 	endResetModel();
 	return true;
@@ -137,7 +145,6 @@ void CsvTableModel::append(QAbstractTableModel *model)
 			}
 		}
 		m_data.append(sl);
-		qDebug() << Q_FUNC_INFO << row << sl;
 	}
 	endResetModel();
 }
@@ -154,7 +161,7 @@ bool CsvTableModel::open(QFile &f, const QString &name)
 	return true;
 }
 
-void CsvTableModel::readData(QTextStream &s)
+void CsvTableModel::readData(QTextStream &s, Options options)
 {
 	forever
 	{
@@ -167,13 +174,13 @@ void CsvTableModel::readData(QTextStream &s)
 		{
 			continue;
 		}
-		const QStringList sl = expandLine(line);
+		const QStringList sl = expandLine(line, options & Trim);
 		m_data += sl;
 		m_colCount = qMax(m_colCount, sl.count());
 	}
 }
 
-QStringList CsvTableModel::expandLine(QString line)
+QStringList CsvTableModel::expandLine(QString line, bool trim)
 {
 	static const QChar dlm('\"');
 	QStringList res;
@@ -238,7 +245,14 @@ QStringList CsvTableModel::expandLine(QString line)
 	}
 	else if (state == String)
 	{
-		res += field;
+		if (trim)
+		{
+			res += field.simplified();
+		}
+		else
+		{
+			res += field;
+		}
 	}
 	return res;
 }
@@ -275,6 +289,30 @@ void CsvTableModel::setHeader(const QStringList &h, bool fixCol)
 	emit headerDataChanged(Qt::Horizontal, 0, m_colCount);
 }
 
+const QStringList CsvTableModel::requireColumns(const QStringList h) const
+{
+	QStringList res;
+	foreach (const QString &s, h)
+	{
+		if (m_header.indexOf(s) < 0)
+		{
+			res += s;
+		}
+	}
+	return res;
+}
+
+const QVector<int> CsvTableModel::columnIdx(const QStringList h) const
+{
+	QVector<int> res;
+	foreach (const QString &s, h)
+	{
+		int idx  = m_header.indexOf(s);
+		res += idx;
+	}
+	return res;
+}
+
 int CsvTableModel::rowCount(const QModelIndex &/*parent*/) const
 {
 	return m_data.count();
@@ -309,7 +347,7 @@ QVariant CsvTableModel::data(const QModelIndex &index, int role) const
 				return QString("");
 			}
 		}
-			break;
+		break;
 		}
 	}
 	return QVariant();
@@ -339,4 +377,29 @@ Qt::ItemFlags CsvTableModel::flags(const QModelIndex &/*index*/) const
 {
 	Qt::ItemFlags flags =  Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemNeverHasChildren;
 	return flags;
+}
+
+
+bool CsvTableModel::insertRows(int row, int count, const QModelIndex &parent)
+{
+	row = qBound(0, row, rowCount());
+	QStringList dummy;
+	beginInsertRows(parent, row, row + count - 1);
+	m_data.insert(row, count, dummy);
+	endInsertRows();
+	return true;
+}
+
+bool CsvTableModel::removeRows(int row, int count, const QModelIndex &parent)
+{
+	row = qBound(0, row, rowCount() - 1);
+
+	beginRemoveRows(parent, row, row + count - 1);
+	for (int i = 0; i < count; ++i)
+	{
+//		qDebug() << Q_FUNC_INFO << i << m_data[row].cursor;
+		m_data.removeAt(row);
+	}
+	endRemoveRows();
+	return true;
 }
