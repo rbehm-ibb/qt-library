@@ -33,5 +33,6 @@
         <file>stdicons/edit-copy.png</file>
         <file>stdicons/edit-cut.png</file>
         <file>stdicons/edit-paste.png</file>
+        <file>stdicons/accept.png</file>
     </qresource>
 </RCC>
