@@ -16,6 +16,7 @@ include( $$[PRTEMPLATE]/lib/utils/filetextstream/filetextstream.pri )
 include( $$[PRTEMPLATE]/lib/serialport/ibserialport.pri )
 include( $$[PRTEMPLATE]/lib/osmview/osmwidget.pri )
 include( $$[PRTEMPLATE]/lib/utils/commsocket/commserver.pri )
+include( $$[PRTEMPLATE]/lib/utils/history/history.pri )
 
 HEADERS += \
  
