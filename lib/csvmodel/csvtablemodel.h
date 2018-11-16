@@ -32,6 +32,8 @@ public:
 	const QVector<int> columnIdx(const QStringList h) const;
 
 	const QVector<QStringList> &rawData() const { return m_data; }
+	const QStringList &rawData(int row) const { return m_data[row]; }
+	void addLine(const QStringList &line) { m_data.append(line); }
 
 	// QAbstractItemModel interface
 	virtual int rowCount(const QModelIndex &parent = QModelIndex()) const;
