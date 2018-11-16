@@ -20,6 +20,17 @@ public:
 	int maxHist() const { return m_maxHist; }
 	void setMaxHist(int maxHist);
 
+	QStringList history() const { return m_history; }
+
+	QString groupKey() const { return m_groupKey; }
+	void setGroupKey(const QString &groupKey);
+
+	QString arrayKey() const { return m_arrayKey; }
+	void setArrayKey(const QString &arrayKey);
+
+	QString itemKey() const { return m_itemKey; }
+	void setItemKey(const QString &itemKey);
+
 signals:
 	void historySelected(const QString &s);
 public slots:
@@ -27,14 +38,17 @@ public slots:
 	void addHistory(QFile *f);
 private slots:
 	void historySlot();
-//	void selected();
 protected:
 private:
 	void limitAndStore();
+	void readHistory();
 	QAction *m_histAction;
 	QMenu *m_menu;
 	int m_maxHist;
 	QStringList m_history;
+	QString m_groupKey;
+	QString m_arrayKey;
+	QString m_itemKey;
 
 };
 
