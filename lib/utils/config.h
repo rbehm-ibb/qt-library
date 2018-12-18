@@ -27,16 +27,19 @@ public:
 	static QString stringValue(const char *key, const QString &defaultValue = QString::null);
 	static int intValue(const QString &key, int defaultValue = INT_MIN);
 	static int intValue(const char *key, int defaultValue = INT_MIN);
+	static qreal realValue(const QString &key, qreal defaultValue = qQNaN());
+	static qreal realValue(const char *key, qreal defaultValue = qQNaN());
 
 	static void setValue(const QString &key, const QVariant value);
 	// next is needed to prevent getting triggered with int value.
-	static void setValue(const QString &key, const double value) { setValue(key, QVariant(value)); }
 	static void setValue(const char *key, const QByteArray d) { setValue(key, QVariant(d)); }
 	static void setValue(const QString &key, const QString &value);
 	static void setValue(const char *key, const QString &value);
 	static void setValue(const char *key, const char *value);
 	static void setValue(const QString &key, const int value);
 	static void setValue(const char *key, const int value);
+	static void setValue(const QString &key, const qreal value);
+	static void setValue(const char *key, const qreal value);
 
 	static void beginGroup(const char *grp);
 	static void endGroup();

@@ -101,6 +101,20 @@ int Config::intValue(const char *key, int defaultValue)
 	return intValue(QString::fromLatin1(key), defaultValue);
 }
 
+qreal Config::realValue(const QString &key, qreal defaultValue)
+{
+	if (! i()->m_conf->contains(key) && ! qIsNaN(defaultValue))
+	{
+		instance->m_conf->setValue(key, defaultValue);
+	}
+	return instance->m_conf->value(key, defaultValue).toDouble();
+}
+
+qreal Config::realValue(const char *key, qreal defaultValue)
+{
+	return realValue(QString::fromLatin1(key), defaultValue);
+}
+
 void Config::setValue(const QString &key, const QVariant value)
 {
 	if (! i()->conf()->contains(key) || (i()->conf()->value(key) != value))
@@ -137,6 +151,19 @@ void Config::setValue(const QString &key, const int value)
 }
 
 void Config::setValue(const char *key, const int value)
+{
+	setValue(QString::fromLatin1(key), value);
+}
+
+void Config::setValue(const QString &key, const qreal value)
+{
+	if (! i()->conf()->contains(key) || (i()->conf()->value(key).toDouble() != value))
+	{
+		i()->m_conf->setValue(key, value);
+	}
+}
+
+void Config::setValue(const char *key, const qreal value)
 {
 	setValue(QString::fromLatin1(key), value);
 }
