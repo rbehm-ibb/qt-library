@@ -50,6 +50,8 @@ OsmWidget::OsmWidget(QWidget *parent)
 		p = p->parentWidget();
 	}
 	qDebug() << Q_FUNC_INFO << p;
+#endif
+#if 0
 	QMainWindow *mw = qobject_cast<QMainWindow*>(p);
 	if (mw)
 	{
