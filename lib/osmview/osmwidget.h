@@ -34,7 +34,7 @@ class OsmWidget : public QWidget
 	Q_PROPERTY(QPointF center READ center WRITE setCenter NOTIFY centerChanged)
 	Q_PROPERTY(bool fetchTiles READ fetchTiles WRITE setFetchTiles)
 public:
-	explicit OsmWidget(QWidget *parent = 0);
+	explicit OsmWidget(QWidget *parent = nullptr);
 	OsmView *view() const { return m_osmView; }
 	QList<QGraphicsItem *> items() const;
 	void addItem(QGraphicsItem *item);

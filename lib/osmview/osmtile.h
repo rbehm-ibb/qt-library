@@ -10,7 +10,7 @@ class OsmTile : public QObject
 {
 	Q_OBJECT
 public:
-	explicit OsmTile(QObject *parent = 0);
+	explicit OsmTile(QObject *parent = nullptr);
 	~OsmTile();
 	uint zoom() const { return m_zoom; }
 	uint idxX() const { return m_ix; }

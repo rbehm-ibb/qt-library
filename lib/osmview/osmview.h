@@ -12,7 +12,7 @@ class OsmView : public QGraphicsView
 {
 	Q_OBJECT
 public:
-	explicit OsmView(QWidget *parent = 0);
+	explicit OsmView(QWidget *parent = nullptr);
 	~OsmView();
 	QPointF center() const { return m_center; }
 	QRectF geoRect() const { return mapToScene(rect()).boundingRect() /*m_geoRect*/; }

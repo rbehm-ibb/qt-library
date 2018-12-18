@@ -12,7 +12,7 @@ class OsmScene : public QGraphicsScene
 {
 	Q_OBJECT
 public:
-	explicit OsmScene(QObject *parent = 0);
+	explicit OsmScene(QObject *parent = nullptr);
 	~OsmScene();
 	void fill(QRectF, int z);
 	QTransform trans(QPointF center, int z);
