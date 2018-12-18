@@ -11,7 +11,7 @@ class IBToolBar : public QToolBar
 {
 	Q_OBJECT
 public:
-	explicit IBToolBar(QWidget *parent = 0);
+	explicit IBToolBar(QWidget *parent = nullptr);
 	~IBToolBar();
 	QAction *quit() const { return m_quit; }
 	QAction *about();
