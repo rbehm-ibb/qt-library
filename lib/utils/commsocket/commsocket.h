@@ -43,7 +43,7 @@ public:
 	/// \brief creates a normal CommSocket with name and parent
 	/// \param name used to connect to the server of the same name
 	/// \param parent the usual parent for a QObject
-	CommSocket(QString name, QObject *parent = 0);
+	CommSocket(QString name, QObject *parent = nullptr);
 	~CommSocket();
 
 	bool isConnected() const { return state() == QLocalSocket::ConnectedState; }	///< are we connected to the server?

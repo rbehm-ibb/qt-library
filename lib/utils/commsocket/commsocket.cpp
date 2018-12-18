@@ -13,7 +13,7 @@ CommSocket::CommSocket(QString name, QObject *parent)
 	, m_rxState(WaitForSignature)
 	, m_size(0)
 	, m_reconnectTimer(new QTimer(this))
-	, m_watchDogTimer(0)
+	, m_watchDogTimer(nullptr)
 {
 //	qDebug() << Q_FUNC_INFO << m_name;
 	connect(this, &QLocalSocket::connected, this, &CommSocket::connectedSlot);
@@ -30,8 +30,8 @@ CommSocket::CommSocket(quintptr socketDescriptor, QString name, QObject *parent)
 	, m_name(name)
 	, m_rxState(WaitForSignature)
 	, m_size(0)
-	, m_reconnectTimer(0)
-	, m_watchDogTimer(0)
+	, m_reconnectTimer(nullptr)
+	, m_watchDogTimer(nullptr)
 {
 //	qDebug() << Q_FUNC_INFO << socketDescriptor;
 	setSocketDescriptor(socketDescriptor);
@@ -58,9 +58,9 @@ void CommSocket::sendDirect(int signature, const QByteArray data)
 	if (isConnected())
 	{
 //		qDebug()  << Q_FUNC_INFO << m_name << signature << data.size();
-		write((const char*)&signature, sizeof(signature));
-		quint32 size = data.size();
-		write((const char*)&size, sizeof(size));
+		write((const char*)(&signature), sizeof(signature));
+		qint32 size = data.size();
+		write((const char*)(&size), sizeof(size));
 		write(data.constData(), size);
 	}
 	else
@@ -96,7 +96,7 @@ void CommSocket::readyReadSlot()
 		switch(m_rxState)
 		{
 		case WaitForSignature:
-			if (bytesAvailable() >= sizeof(m_sig))
+			if (bytesAvailable() >= int(sizeof(m_sig)))
 			{
 				read((char*)&m_sig, sizeof(m_sig));
 				m_rxState = WaitForSize;
@@ -104,7 +104,7 @@ void CommSocket::readyReadSlot()
 			}
 			break;
 		case WaitForSize:
-			if (bytesAvailable() >= sizeof(m_size))
+			if (bytesAvailable() >= int(sizeof(m_size)))
 			{
 				read((char*)&m_size, sizeof(m_size));
 //				qDebug() << "read size" << m_size;
@@ -167,7 +167,7 @@ void CommSocket::disconnectedSlot()
 void CommSocket::resetBuffer()
 {
 	m_txBuffer.close();
-	m_txStream.setDevice(0);
+	m_txStream.setDevice(nullptr);
 	m_txData.clear();
 	m_txBuffer.setBuffer(&m_txData);
 	m_txBuffer.open(QIODevice::WriteOnly);
