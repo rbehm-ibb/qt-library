@@ -98,15 +98,15 @@ void CommSocket::readyReadSlot()
 		case WaitForSignature:
 			if (bytesAvailable() >= int(sizeof(m_sig)))
 			{
-				read((char*)&m_sig, sizeof(m_sig));
+				read(reinterpret_cast<char*>(&m_sig), sizeof(m_sig));
 				m_rxState = WaitForSize;
 				m_rxdData.clear();
 			}
 			break;
 		case WaitForSize:
-			if (bytesAvailable() >= int(sizeof(m_size)))
+			if (bytesAvailable() >= static_cast<int>(sizeof(m_size)))
 			{
-				read((char*)&m_size, sizeof(m_size));
+				read(reinterpret_cast<char*>(&m_size), sizeof(m_size));
 //				qDebug() << "read size" << m_size;
 				if (m_size == 0)	// empty data
 				{
