@@ -83,6 +83,11 @@ void OsmWidget::setPath(QString path)
 	OsmTile::setPath(path);
 }
 
+QString OsmWidget::path()
+{
+	return OsmTile::path();
+}
+
 void OsmWidget::setFetchTiles(bool fetchTiles)
 {
 	OsmTile::setFetchTiles(fetchTiles);

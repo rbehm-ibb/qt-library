@@ -20,6 +20,7 @@ public:
 	static QPoint idxFromCoord(QPointF, uint);
 	static QRectF calcRect(QPointF, uint z);
 	static void setPath(QString path);
+	static QString path() { return m_path; }
 	static bool fetchTiles() { return m_fetchTiles; }
 	static void setFetchTiles(bool fetchTiles) { m_fetchTiles = fetchTiles; }
 	void get(QPointF, uint z);

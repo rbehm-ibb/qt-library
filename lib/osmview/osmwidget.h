@@ -39,6 +39,7 @@ public:
 	QList<QGraphicsItem *> items() const;
 	void addItem(QGraphicsItem *item);
 	static void setPath(QString path);
+	static QString path();
 	static void setFetchTiles(bool fetchTiles);
 	static bool fetchTiles();
 	QToolBar *toolBar() const { return m_toolbar; }
