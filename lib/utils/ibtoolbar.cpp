@@ -45,14 +45,19 @@ void IBToolBar::addAbout()
 	QWidget *tbs = new QWidget;
 	tbs->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Preferred);
 	addWidget(tbs);
+	QAction *what = QWhatsThis::createAction(this);
+	addAction(what);
+	what->setStatusTip(tr("Whats this?"));
 //	m_about = addAction(QIcon(":/toolbarspacer/info.svgz"), tr("&About"));
 	m_about = addAction(QIcon(":/qt-project.org/styles/commonstyle/images/fileinfo-32.png"), tr("&About"));
+	m_about->setToolTip(tr("Information about this program"));
+	m_about->setWhatsThis(tr("Information about this program"));
+	m_about->setStatusTip(tr("About this program"));
 	QObject::connect(m_about, &QAction::triggered, this, &IBToolBar::aboutSlot);
 	QMainWindow *mw = qobject_cast<QMainWindow*>(parentWidget());
 	if (mw)
 	{
 		mw->setWindowTitle(QString("%1 %2").arg(qApp->applicationName()).arg(qApp->applicationVersion()));
-
 	}
 }
 
@@ -64,6 +69,9 @@ void IBToolBar::addQuit()
 		m_quit = addAction(QIcon(":/toolbarspacer/exit.svgz"), tr("Exit"), mw, SLOT(quit()));
 		m_quit->setShortcut(QKeySequence::Quit);
 		m_quit->setObjectName("Quit-Action");
+		m_quit->setToolTip(m_quit->shortcut().toString() + " " + tr("Leave this program"));
+		m_quit->setWhatsThis(tr("Leave this program") + "\n" + m_quit->shortcut().toString());
+		m_quit->setStatusTip(m_quit->whatsThis());
 	}
 	else
 	{
@@ -85,7 +93,7 @@ void IBToolBar::aboutSlot()
 		     "<p>&copy; %3, %7 %4"
 		     "<p>Web: <a href=\"http://%5\">http://%5</a>"
 		     "<p>Mail: <a href=\"mailto:info@%5\">info@%5</a>"
-		     "<p>Using  <img src=\":/stdicons/qt-logo-about.png\"> %6"
+		     "<p>Using  <a href=\"http://qt.io\"><img src=\":/stdicons/qt-logo-about.png\"> %6</a>"
 		     );
 	text = text
 		.arg(qApp->applicationName())
