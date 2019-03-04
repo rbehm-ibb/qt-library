@@ -11,8 +11,8 @@
 #include "ledicon.h"
 #include "ledbutton.h"
 
-MainWindow::MainWindow(QWidget *parent) :
-	QMainWindow(parent)
+MainWindow::MainWindow(QString filename) :
+	QMainWindow(filename)
 {
 	setWindowIcon(QIcon(":/wizard"));
 	setWindowTitle(qApp->applicationName() + " " +qApp->applicationVersion());

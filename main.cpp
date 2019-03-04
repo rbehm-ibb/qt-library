@@ -13,12 +13,12 @@ int main(int argc, char *argv[])
 	QApplication app(argc, argv);
 	app.setApplicationName("resource-view");
 	app.setApplicationVersion("V0.1");
-	app.setOrganizationDomain("avioscout.net");
-	app.setOrganizationName("R.Behm");
+	app.setOrganizationDomain("ibb-aviotec.com");
+	app.setOrganizationName("IBB-aviotec");
+	QString fileName;
 	{
 		const QString logo(":/logo/ibb-logo");
 		app.setProperty("copyright-icon", logo);
-//		app.setWindowIcon(QIcon(":/qt-project.org/qmessagebox/images/qtlogo-64.png"));
 		app.setWindowIcon(QIcon(logo));
 	}
 	{
@@ -26,7 +26,13 @@ int main(int argc, char *argv[])
 		parser.setApplicationDescription(app.applicationName());
 		parser.addHelpOption();
 		parser.addVersionOption();
+		parser.addPositionalArgument("file", "file-name");
 		parser.process(app);
+		parser.process(app);
+		if (! parser.positionalArguments().isEmpty())
+		{
+			fileName = parser.positionalArguments().first();
+		}
 	}
 	{
 		QFile sf(":/styles.css");
@@ -35,7 +41,7 @@ int main(int argc, char *argv[])
 	}
 	Config::loadDefaults();
 	SingleApp sapp;
-	MainWindow mw;
+	MainWindow mw(fileName);
 	QObject::connect(&sapp, &SingleApp::kill, &mw, &MainWindow::quit);
 	mw.show();
 	return app.exec();
