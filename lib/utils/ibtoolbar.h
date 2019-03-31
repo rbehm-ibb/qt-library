@@ -15,7 +15,7 @@ public:
 	~IBToolBar();
 	QAction *quit() const { return m_quit; }
 	QAction *about();
-	// QObject interface
+	void removeWhatis();
 public:
 	virtual bool event(QEvent *e);
 
@@ -28,8 +28,9 @@ protected:
 private:
 	QAction *m_quit;
 	QAction *m_about;
+	QAction *m_what;
+	bool m_noWhat;
 
-	// QObject interface
 	void addAbout();
 	void addQuit();
 };

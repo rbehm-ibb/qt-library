@@ -10,6 +10,8 @@ IBToolBar::IBToolBar(QWidget *parent)
 	: QToolBar(parent)
 	, m_quit(nullptr)
 	, m_about(nullptr)
+	, m_what(nullptr)
+	, m_noWhat(false)
 {
 	addQuit();
 }
@@ -27,9 +29,19 @@ QAction *IBToolBar::about()
 	return m_about;
 }
 
+void IBToolBar::removeWhatis()
+{
+	if (m_what)
+	{
+		delete m_what;
+		m_what = 0;
+	}
+	m_noWhat = true;
+}
+
 bool IBToolBar::event(QEvent *e)
 {
-//	qDebug() << Q_FUNC_INFO << e;
+	//	qDebug() << Q_FUNC_INFO << e;
 	if (e->type() == QEvent::ChildPolished)
 	{
 		if (! m_about)
@@ -45,16 +57,19 @@ void IBToolBar::addAbout()
 	QWidget *tbs = new QWidget;
 	tbs->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Preferred);
 	addWidget(tbs);
-	QAction *what = QWhatsThis::createAction(this);
-	addAction(what);
-	what->setStatusTip(tr("Whats this?"));
+	if (! m_noWhat)
+	{
+		m_what = QWhatsThis::createAction(this);
+		addAction(m_what);
+		m_what->setStatusTip(tr("Whats this?"));
+	}
 //	m_about = addAction(QIcon(":/toolbarspacer/info.svgz"), tr("&About"));
 	m_about = addAction(QIcon(":/qt-project.org/styles/commonstyle/images/fileinfo-32.png"), tr("&About"));
 	m_about->setToolTip(tr("Information about this program"));
 	m_about->setWhatsThis(tr("Information about this program"));
 	m_about->setStatusTip(tr("About this program"));
 	QObject::connect(m_about, &QAction::triggered, this, &IBToolBar::aboutSlot);
-	QMainWindow *mw = qobject_cast<QMainWindow*>(parentWidget());
+	QMainWindow *mw = qobject_cast<QMainWindow *>(parentWidget());
 	if (mw)
 	{
 		mw->setWindowTitle(QString("%1 %2").arg(qApp->applicationName()).arg(qApp->applicationVersion()));
@@ -63,7 +78,7 @@ void IBToolBar::addAbout()
 
 void IBToolBar::addQuit()
 {
-	QMainWindow *mw = qobject_cast<QMainWindow*>(parentWidget());
+	QMainWindow *mw = qobject_cast<QMainWindow *>(parentWidget());
 	if (mw)
 	{
 		m_quit = addAction(QIcon(":/toolbarspacer/exit.svgz"), tr("Exit"), mw, SLOT(quit()));
@@ -94,15 +109,15 @@ void IBToolBar::aboutSlot()
 		     "<p>Web: <a href=\"http://%5\">http://%5</a>"
 		     "<p>Mail: <a href=\"mailto:info@%5\">info@%5</a>"
 		     "<p>Using  <a href=\"http://qt.io\"><img src=\":/stdicons/qt-logo-about.png\"> %6</a>"
-		     );
+		    );
 	text = text
-		.arg(qApp->applicationName())
-		.arg(qApp->applicationVersion())
-		.arg(QString(__DATE__).section(' ', -1, -1))
-		.arg(qApp->organizationName())
-		.arg(qApp->organizationDomain())
-		.arg(qVersion())
-		.arg(copyIcon)
-		;
+	       .arg(qApp->applicationName())
+	       .arg(qApp->applicationVersion())
+	       .arg(QString(__DATE__).section(' ', -1, -1))
+	       .arg(qApp->organizationName())
+	       .arg(qApp->organizationDomain())
+	       .arg(qVersion())
+	       .arg(copyIcon)
+	       ;
 	QMessageBox::about(parentWidget(), qApp->applicationName(), text);
 }
