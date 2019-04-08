@@ -34,6 +34,7 @@ signals:
 
 private slots:
 	void dataLoaded();
+	void error(QNetworkReply::NetworkError code);
 private:
 	static QNetworkAccessManager * m_networkManager;
 	static QNetworkDiskCache *m_cache;

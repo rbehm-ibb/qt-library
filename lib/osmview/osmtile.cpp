@@ -39,7 +39,7 @@ static inline double tiley2lat(uint y, uint z)
 
 OsmTile::OsmTile(QObject *parent)
 	: QObject(parent)
-	, m_qnr(0)
+//	, m_qnr(0)
 {
 }
 
@@ -47,8 +47,13 @@ OsmTile::~OsmTile()
 {
 	if (m_qnr)
 	{
+//		qWarning() << Q_FUNC_INFO << m_qnr.data()->url();
 		m_qnr->close();
 		m_qnr->deleteLater();
+	}
+	else
+	{
+//		qWarning() << Q_FUNC_INFO << m_qnr;
 	}
 }
 
@@ -144,8 +149,10 @@ void OsmTile::get(uint ix, uint iy, uint z)
 		QNetworkRequest req(url);
 		req.setRawHeader("user-agent", (qApp->applicationName() + " " + qApp->applicationVersion()).toLatin1());
 //		qDebug() << Q_FUNC_INFO << m_fetchTiles << url;
-		m_qnr = networkManager()->get(req);
-		connect(m_qnr.data(), &QNetworkReply::finished, this, &OsmTile::dataLoaded);
+		QNetworkReply *qnr = networkManager()->get(req);
+		connect(qnr, &QNetworkReply::finished, this, &OsmTile::dataLoaded);
+		connect(qnr, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(error(QNetworkReply::NetworkError)));
+		m_qnr = qnr;
 	}
 }
 
@@ -165,29 +172,30 @@ QNetworkAccessManager *OsmTile::networkManager()
 
 void OsmTile::dataLoaded()
 {
-	//	qDebug() << Q_FUNC_INFO << m_qnr;
-	if (! m_qnr)
+	QNetworkReply *qnr = qobject_cast<QNetworkReply*>(sender());
+//	qDebug() << Q_FUNC_INFO << qnr;
+	if (! qnr)
 	{
 		qDebug() << Q_FUNC_INFO << "Undef";
 		return;
 
 	}
-	if (m_qnr->error() != QNetworkReply::NoError)
+	if (qnr->error() != QNetworkReply::NoError)
 	{
-		if (m_qnr->error() != QNetworkReply::OperationCanceledError)
-			qWarning() << Q_FUNC_INFO << m_qnr->errorString() << m_qnr->url();
-		m_qnr->close();
-		m_qnr->deleteLater();
-		m_qnr = 0;
+		if (qnr->error() != QNetworkReply::OperationCanceledError)
+			qWarning() << Q_FUNC_INFO << qnr->errorString() << qnr->url();
+		qnr->close();
+		qnr->deleteLater();
+		qnr = 0;
 		return;
 	}
 //	qDebug() << Q_FUNC_INFO << cname;
-	QUrl url = m_qnr->url();
-	QByteArray data = m_qnr->readAll();
+	QUrl url = qnr->url();
+	QByteArray data = qnr->readAll();
 	bool ok = m_pix.loadFromData(data);
 	if (! ok)
 	{
-		qWarning() << Q_FUNC_INFO << "bad data" << m_qnr->url();
+		qWarning() << Q_FUNC_INFO << "bad data" << qnr->url();
 	}
 	else
 	{
@@ -209,9 +217,15 @@ void OsmTile::dataLoaded()
 			m_pix.save(dir.absoluteFilePath(path[2] + "_" + path[3]));
 		}
 	}
-	m_qnr->close();
-	m_qnr->deleteLater();
+//	qDebug() << Q_FUNC_INFO << qnr->url();
+	qnr->close();
+	qnr->deleteLater();
 	m_qnr = 0;
+}
+
+void OsmTile::error(QNetworkReply::NetworkError code)
+{
+	qDebug() << Q_FUNC_INFO << code;
 }
 
 
