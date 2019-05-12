@@ -10,10 +10,15 @@ SingleApp::SingleApp(bool kill, QObject *parent)
 	: QObject(parent)
 {
 	const QString dirName("singleApp");
-	QDir dir("/var/lock");
+//	QDir dir("/var/lock");
+	QDir dir("/tmp/");
 	if (! dir.exists(dirName))
 	{
-		dir.mkdir(dirName);
+		qDebug() << Q_FUNC_INFO << "Create" << dir.filePath(dirName);
+		if (! dir.mkdir(dirName))
+		{
+			qWarning() << Q_FUNC_INFO << "problem creating" << dir.filePath(dirName);
+		}
 	}
 	dir.cd(dirName);
 	m_sockName = dir.absoluteFilePath(qApp->applicationName());
@@ -32,7 +37,7 @@ SingleApp::SingleApp(bool kill, QObject *parent)
 		}
 		else
 		{
-			QMessageBox::critical(0, qApp->applicationName(), "Another instance is running.");
+			QMessageBox::critical(nullptr, qApp->applicationName(), "Another instance is running.");
 			exit(1);
 		}
 	}

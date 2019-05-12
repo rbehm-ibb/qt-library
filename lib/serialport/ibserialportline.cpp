@@ -59,9 +59,18 @@ QByteArray IBSerialPortLine::readLine()
 
 void IBSerialPortLine::sendLine(const QByteArray &line)
 {
-	write(m_bol);
-	write(line);
-	write(m_eol);
+	if (showLine)
+	{
+		QByteArray ba = m_bol + line + m_eol;
+		write(ba);
+		qDebug() << Q_FUNC_INFO << ba;
+	}
+	else
+	{
+		write(m_bol);
+		write(line);
+		write(m_eol);
+	}
 }
 
 void IBSerialPortLine::readRxdDataSlot()
@@ -73,7 +82,7 @@ void IBSerialPortLine::readRxdDataSlot()
 //		qDebug() << Q_FUNC_INFO << isBreakEnabled();
 		if (showLine)
 		{
-			qDebug() << objectName() << m_rxdData.toHex();
+			qDebug() << objectName() << m_rxdData.toHex() << m_bol.toHex() << m_eol.toHex();
 		}
 		for (;;)
 		{
@@ -117,7 +126,7 @@ void IBSerialPortLine::readRxdDataSlot()
 					m_lines.enqueue(line);
 					if (showLine)
 					{
-						qDebug() << objectName() << line;
+						qDebug() << objectName() << "line" << line;
 					}
 				}
 			}
@@ -148,7 +157,7 @@ void IBSerialPortLine::rxTimeoutSlot()
 {
 	if (m_hadBol)
 	{
-		qWarning() << Q_FUNC_INFO << objectName() << m_hadBol<< m_rxdData;
+		qWarning() << Q_FUNC_INFO << objectName() << m_hadBol << m_rxdData;
 		m_hadBol = false;
 		m_rxdData.clear();
 		emit rxTimeout();
