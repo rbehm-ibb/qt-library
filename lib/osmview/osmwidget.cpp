@@ -159,6 +159,7 @@ void OsmWidget::changedZoom(int z)
 	m_actZoomP->setEnabled(z < 18);
 	m_actZoomM->setEnabled(z > 0);
 	m_zoomSlider->setValue(z);
+	emit zoomChanged(z);
 }
 
 void OsmWidget::goHome()
