@@ -210,7 +210,7 @@ void OsmTile::dataLoaded()
 			QString sub = path[1];
 			if (! dir.exists(sub))
 			{
-				qDebug() << Q_FUNC_INFO << "create" << sub;
+//				qDebug() << Q_FUNC_INFO << "create" << sub;
 				dir.mkdir(sub);
 			}
 			dir.cd(sub);
