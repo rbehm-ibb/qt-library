@@ -11,7 +11,7 @@ SerialPortSelector::SerialPortSelector(QWidget *parent)
 {
 	foreach (auto & port, QSerialPortInfo::availablePorts())
 	{
-		addItem(port.portName() + " " + port.description(), port.portName());
+		addItem(port.portName() + " " + port.manufacturer() + " " + port.description(), port.portName());
 	}
 }
 
