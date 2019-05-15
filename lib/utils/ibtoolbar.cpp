@@ -63,8 +63,8 @@ void IBToolBar::addAbout()
 		addAction(m_what);
 		m_what->setStatusTip(tr("Whats this?"));
 	}
-//	m_about = addAction(QIcon(":/toolbarspacer/info.svgz"), tr("&About"));
-	m_about = addAction(QIcon(":/qt-project.org/styles/commonstyle/images/fileinfo-32.png"), tr("&About"));
+	m_about = addAction(QIcon(":/toolbarspacer/info.svgz"), tr("&About"));
+//	m_about = addAction(QIcon(":/qt-project.org/styles/commonstyle/images/fileinfo-32.png"), tr("&About"));
 	m_about->setToolTip(tr("Information about this program"));
 	m_about->setWhatsThis(tr("Information about this program"));
 	m_about->setStatusTip(tr("About this program"));

@@ -24,15 +24,17 @@ class LedIcon : public QLabel
 {
 	Q_OBJECT
 public:
-	LedIcon(QWidget *parent = 0);
+	LedIcon(QWidget *parent = nullptr);
 	/// \brief Create a LedIcon
 	/// \param color the initial color to use
 	/// \param parent the usaula parent for Qidget
-	LedIcon(LedIconSource::LedColor color = LedIconSource::Off, QWidget *parent = 0);
+	LedIcon(LedIconSource::LedColor color = LedIconSource::Off, QWidget *parent = nullptr);
 	LedIconSource::LedColor color() const { return m_color; }
 
 	int size() const { return m_size; }
 	void setSize(int size);
+
+	bool on() const { return m_on; }
 
 public slots:
 	void setLed(LedIconSource::LedColor color);	///< show a LED with \param color
@@ -40,6 +42,7 @@ public slots:
 private:
 	LedIconSource::LedColor m_color;
 	int m_size;
+	bool m_on;
 };
 
 #endif // LEDICON_H

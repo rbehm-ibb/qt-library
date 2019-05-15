@@ -40,8 +40,8 @@ public:
 	/// \brief Creates a IBSerialPortLine
 	/// \param device The device to use (ttySx) with optional baudrate appended
 	/// \param parent For QObject
-	IBSerialPortLine(QString device, QObject *parent = 0);
-	IBSerialPortLine(QString device, int defaultBaud, QObject *parent = 0);
+	IBSerialPortLine(QString device, QObject *parent = nullptr);
+	IBSerialPortLine(QString device, int defaultBaud, QObject *parent = nullptr);
 	~IBSerialPortLine();
 	bool ok() const { return isOpen(); }				///< valid and open?
 	QByteArray readLine();						///< get a line if avail, empty if non avail
