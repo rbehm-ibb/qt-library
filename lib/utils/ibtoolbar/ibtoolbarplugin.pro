@@ -10,7 +10,7 @@ QTDIR_build {
 # This is only for the Qt build. Do not use externally. We mean it.
 PLUGIN_TYPE = designer
 
-PLUGIN_CLASS_NAME = OsmWidgetPlugin
+PLUGIN_CLASS_NAME = IbToolBarPlugin
 load(qt_plugin)
 } else {
 # Public example:
