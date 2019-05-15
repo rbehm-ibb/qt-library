@@ -12,7 +12,7 @@ class SerialPortSelector : public QComboBox
 {
 	Q_OBJECT
 public:
-	explicit SerialPortSelector(QWidget *parent = 0);
+	explicit SerialPortSelector(QWidget *parent = nullptr);
 	~SerialPortSelector();
 	void init(const QString port);
 	QString portname() const;
