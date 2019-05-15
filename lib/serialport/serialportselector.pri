@@ -4,4 +4,4 @@ HEADERS += \
 SOURCES += \
     $$PWD/serialportselector.cpp
 
-QT += serialport
+QT += core gui widgets serialport
