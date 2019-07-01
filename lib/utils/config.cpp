@@ -189,8 +189,8 @@ Config *Config::i()
 	if (! instance)
 	{
 		instance = new Config(qApp);
-		setValue("app/name", qApp->applicationName());
-		setValue("app/version", qApp->applicationVersion());
+//		setValue("app/name", qApp->applicationName());
+//		setValue("app/version", qApp->applicationVersion());
 	}
 	return instance;
 }
