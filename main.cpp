@@ -28,7 +28,6 @@ int main(int argc, char *argv[])
 		parser.addVersionOption();
 		parser.addPositionalArgument("file", "file-name");
 		parser.process(app);
-		parser.process(app);
 		if (! parser.positionalArguments().isEmpty())
 		{
 			fileName = parser.positionalArguments().first();
