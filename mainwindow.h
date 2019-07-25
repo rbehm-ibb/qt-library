@@ -1,28 +1,32 @@
 // ******************************************************
-// * copyright (C) 2016 by Reinhardt Bhm/rbehm@hushmail.com
+// * copyright (C) 2018 by Reinhardt Behm/rbehm@hushmail.com
 // * All Rights reserved
+// * created 6/19/2018 by behm
 // ******************************************************
 
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <QMainWindow>
+
+namespace Ui {
+class MainWindow;
+}
+
+
 class MainWindow : public QMainWindow
 {
 	Q_OBJECT
-public:
-	explicit MainWindow(QString filename);
 
-signals:
+public:
+	explicit MainWindow(QWidget *parent = nullptr);
+	~MainWindow();
 
 public slots:
-
-private slots:
 	void quit();
-	void about();
-	void changeLed();
-	void open();
+private slots:
 private:
-	QLabel *m_fileLabel;
+	Ui::MainWindow *ui;
 };
 
 #endif // MAINWINDOW_H

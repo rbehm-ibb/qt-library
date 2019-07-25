@@ -14,8 +14,8 @@ class LedButton : public QPushButton
 {
 	Q_OBJECT
 public:
-	LedButton(QWidget *parent = 0);
-	LedButton(LedIconSource::LedColor color, const QString &text, QWidget *parent = 0);
+	LedButton(QWidget *parent = nullptr);
+	LedButton(LedIconSource::LedColor color, const QString &text, QWidget *parent = nullptr);
 	LedIconSource::LedColor led() const { return m_color; }
 public slots:
 	void setLed(LedIconSource::LedColor color);
