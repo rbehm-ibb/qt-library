@@ -6,7 +6,7 @@
 
 #include "config.h"
 
-Config *Config::instance = 0;
+Config *Config::instance = nullptr;
 
 Config::Config(QObject *parent)
 	: QObject(parent)
