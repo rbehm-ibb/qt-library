@@ -23,8 +23,8 @@ public:
 	~Config();
 	static bool loadDefaults(const QString &cfgName = QString());
 	static QVariant value(const QString &key, const QVariant defaultValue = QVariant());
-	static QString stringValue(const QString &key, const QString &defaultValue = QString::null);
-	static QString stringValue(const char *key, const QString &defaultValue = QString::null);
+	static QString stringValue(const QString &key, const QString &defaultValue = QString());
+	static QString stringValue(const char *key, const QString &defaultValue = QString());
 	static int intValue(const QString &key, int defaultValue = INT_MIN);
 	static int intValue(const char *key, int defaultValue = INT_MIN);
 	static qreal realValue(const QString &key, qreal defaultValue = qQNaN());
@@ -59,7 +59,7 @@ private:
 	QString m_user;
 	static Config *i();
 	static Config *instance;
-	explicit Config(QObject *parent = 0);
+	explicit Config(QObject *parent = nullptr);
 	bool loadDefaultsInternal(const QString &cfgName);
 };
 
