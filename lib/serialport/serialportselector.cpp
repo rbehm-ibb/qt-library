@@ -9,10 +9,7 @@
 SerialPortSelector::SerialPortSelector(QWidget *parent)
 	: QComboBox(parent)
 {
-	foreach (auto & port, QSerialPortInfo::availablePorts())
-	{
-		addItem(port.portName() + " " + port.manufacturer() + " " + port.description(), port.portName());
-	}
+	refresh();
 }
 
 SerialPortSelector::~SerialPortSelector()
@@ -38,5 +35,15 @@ QString SerialPortSelector::portname() const
 void SerialPortSelector::on_currentIndexChanged(int index)
 {
 	emit portChanged(itemData(index).toString());
+}
+
+void SerialPortSelector::refresh()
+{
+	clear();
+	foreach (auto & port, QSerialPortInfo::availablePorts())
+	{
+		addItem(port.portName() + " " + port.manufacturer() + " " + port.description(), port.portName());
+	}
+
 }
 
