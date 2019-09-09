@@ -1,0 +1,5 @@
+// ******************************************************
+// * copyright (C) %YEAR% by Becker Electronics Taiwan Ltd.
+// * All Rights reserved
+// * created %DATE% by %USER%
+// ******************************************************
