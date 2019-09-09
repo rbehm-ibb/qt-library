@@ -20,6 +20,7 @@ signals:
 	void portChanged(const QString portname);
 public slots:
 	void on_currentIndexChanged(int index);
+	void refresh();
 private slots:
 protected:
 private:
