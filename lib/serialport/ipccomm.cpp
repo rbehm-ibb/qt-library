@@ -84,7 +84,7 @@ QString IpcComm::device() const
 	}
 	else
 	{
-		return QString::null;
+		return QString();
 	}
 }
 
