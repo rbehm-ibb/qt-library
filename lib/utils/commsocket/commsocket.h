@@ -103,7 +103,7 @@ private:
 	/// \param socketDescriptor
 	/// \param name (of the server)
 	/// \param parent the usual parent for a QObject
-	CommSocket(quintptr socketDescriptor, QString name, QObject *parent = 0);
+	CommSocket(quintptr socketDescriptor, QString name, QObject *parent = nullptr);
 	/// only for CommServer to have the prefix only at one place.
 	/// has been put here since CommServer uses CommSocket internally
 	static const QString prefix() { return m_prefix; }

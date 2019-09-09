@@ -11,8 +11,8 @@ class FilenameHandler : public QObject
 {
 	Q_OBJECT
 public:
-	explicit FilenameHandler(QString ext, QObject *parent = 0);
-	explicit FilenameHandler(QString fn, QString ext, QObject *parent = 0);
+	explicit FilenameHandler(QString ext, QObject *parent = nullptr);
+	explicit FilenameHandler(QString fn, QString ext, QObject *parent = nullptr);
 	QString fullname() const;
 
 	QString ext() const;

@@ -37,7 +37,7 @@ class CommServer : public QLocalServer
 	Q_OBJECT
 public:
 	/// creates a local server listinging for connections on name
-	CommServer(QString name, QObject *parent = 0);
+	CommServer(QString name, QObject *parent = nullptr);
 	~CommServer();
 	bool isConnected() { return ! sockets().isEmpty(); }	///< do we have any connection?
 	QDataStream & txStream() { return m_txStream; }		///< used to collect data via operator<<(). \sa CommSocket
