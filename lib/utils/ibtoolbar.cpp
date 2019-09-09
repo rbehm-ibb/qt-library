@@ -34,7 +34,7 @@ void IBToolBar::removeWhatis()
 	if (m_what)
 	{
 		delete m_what;
-		m_what = 0;
+		m_what = nullptr;
 	}
 	m_noWhat = true;
 }
@@ -57,12 +57,12 @@ void IBToolBar::addAbout()
 	QWidget *tbs = new QWidget;
 	tbs->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Preferred);
 	addWidget(tbs);
-	if (! m_noWhat)
-	{
-		m_what = QWhatsThis::createAction(this);
-		addAction(m_what);
-		m_what->setStatusTip(tr("Whats this?"));
-	}
+//	if (! m_noWhat)
+//	{
+//		m_what = QWhatsThis::createAction(this);
+//		addAction(m_what);
+//		m_what->setStatusTip(tr("Whats this?"));
+//	}
 	m_about = addAction(QIcon(":/toolbarspacer/info.svgz"), tr("&About"));
 //	m_about = addAction(QIcon(":/qt-project.org/styles/commonstyle/images/fileinfo-32.png"), tr("&About"));
 	m_about->setToolTip(tr("Information about this program"));
