@@ -11,7 +11,7 @@ class SingleApp : public QObject
 {
 	Q_OBJECT
 public:
-	explicit SingleApp(bool kill = true, QObject *parent = 0);
+	explicit SingleApp(bool kill = true, QObject *parent = nullptr);
 	~SingleApp();
 
 signals:

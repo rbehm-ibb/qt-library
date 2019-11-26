@@ -27,6 +27,7 @@ public:
 	/// \param parent for QObject
 	IBSerialPort(QString device, QObject *parent = nullptr);
 	IBSerialPort(QString device, int defaultBaud, QObject *parent = nullptr);
+	IBSerialPort(quint16 vid, quint16 pid, int baud, QObject *parent = 0);
 	QString device() const;
 signals:
 	void lostPortError();

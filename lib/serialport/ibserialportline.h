@@ -9,6 +9,12 @@
 
 #include "ibserialport.h"
 
+// #define IBSerialPortLine_WithShow
+
+#ifdef IBSerialPortLine_WithShow
+extern bool showLine;
+#endif
+
 ///
 /// \brief The IBSerialPortLine class handles generalized line oriented transmission via serial ports.
 ///
@@ -42,6 +48,7 @@ public:
 	/// \param parent For QObject
 	IBSerialPortLine(QString device, QObject *parent = nullptr);
 	IBSerialPortLine(QString device, int defaultBaud, QObject *parent = nullptr);
+	IBSerialPortLine(quint16 vid, quint16 pid, int baud, QObject *parent = nullptr);
 	~IBSerialPortLine();
 	bool ok() const { return isOpen(); }				///< valid and open?
 	QByteArray readLine();						///< get a line if avail, empty if non avail

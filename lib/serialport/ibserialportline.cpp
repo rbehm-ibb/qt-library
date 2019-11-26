@@ -6,8 +6,6 @@
 
 #include "ibserialportline.h"
 
-extern bool showLine;
-
 IBSerialPortLine::IBSerialPortLine(QString device, QObject *parent)
 	: IBSerialPort(device, parent)
 	, m_rxTimer(new QTimer(this))
@@ -26,6 +24,22 @@ IBSerialPortLine::IBSerialPortLine(QString device, QObject *parent)
 
 IBSerialPortLine::IBSerialPortLine(QString device, int defaultBaud, QObject *parent)
 	: IBSerialPort(device, defaultBaud, parent)
+	, m_rxTimer(new QTimer(this))
+	, m_bol(QByteArray())
+	, m_eol(QByteArray("\n"))
+	, m_ignore(QByteArray("\r"))
+	, m_rxTimeoutMsec(1000)
+	, m_maxLineLength(1000)
+	, m_maxLines(20)
+	, m_hadBol(false)
+{
+	connect(this, &QSerialPort::readyRead, this, &IBSerialPortLine::readRxdDataSlot);
+	m_rxTimer->setSingleShot(true);
+	connect(m_rxTimer, &QTimer::timeout, this, &IBSerialPortLine::rxTimeoutSlot);
+}
+
+IBSerialPortLine::IBSerialPortLine(quint16 vid, quint16 pid, int baud, QObject *parent)
+	: IBSerialPort(vid, pid, baud, parent)
 	, m_rxTimer(new QTimer(this))
 	, m_bol(QByteArray())
 	, m_eol(QByteArray("\n"))
@@ -59,6 +73,7 @@ QByteArray IBSerialPortLine::readLine()
 
 void IBSerialPortLine::sendLine(const QByteArray &line)
 {
+#ifdef IBSerialPortLine_WithShow
 	if (showLine)
 	{
 		QByteArray ba = m_bol + line + m_eol;
@@ -66,6 +81,7 @@ void IBSerialPortLine::sendLine(const QByteArray &line)
 		qDebug() << Q_FUNC_INFO << ba;
 	}
 	else
+#endif
 	{
 		write(m_bol);
 		write(line);
@@ -80,10 +96,12 @@ void IBSerialPortLine::readRxdDataSlot()
 	{
 		m_rxdData += rx;
 //		qDebug() << Q_FUNC_INFO << isBreakEnabled();
+#ifdef IBSerialPortLine_WithShow
 		if (showLine)
 		{
 			qDebug() << objectName() << m_rxdData.toHex() << m_bol.toHex() << m_eol.toHex();
 		}
+#endif
 		for (;;)
 		{
 			if (! m_hadBol)
@@ -124,10 +142,12 @@ void IBSerialPortLine::readRxdDataSlot()
 				else
 				{
 					m_lines.enqueue(line);
+#ifdef IBSerialPortLine_WithShow
 					if (showLine)
 					{
 						qDebug() << objectName() << "line" << line;
 					}
+#endif
 				}
 			}
 		}

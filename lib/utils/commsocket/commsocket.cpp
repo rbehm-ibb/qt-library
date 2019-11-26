@@ -34,7 +34,7 @@ CommSocket::CommSocket(quintptr socketDescriptor, QString name, QObject *parent)
 	, m_watchDogTimer(nullptr)
 {
 //	qDebug() << Q_FUNC_INFO << socketDescriptor;
-	setSocketDescriptor(socketDescriptor);
+	setSocketDescriptor(static_cast<qintptr>(socketDescriptor));
 	connect(this, &QLocalSocket::connected, this, &CommSocket::connectedSlot);
 	connect(this, &QLocalSocket::disconnected, this, &CommSocket::disconnectedSlot);
 	connect(this, &QLocalSocket::readyRead, this, &CommSocket::readyReadSlot);

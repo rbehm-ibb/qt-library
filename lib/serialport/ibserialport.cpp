@@ -18,6 +18,36 @@ IBSerialPort::IBSerialPort(QString device, int defaultBaud, QObject *parent)
 	init(device, defaultBaud);
 }
 
+IBSerialPort::IBSerialPort(quint16 vid, quint16 pid, int baud, QObject *parent)
+	: QSerialPort(parent)
+{
+	QSerialPortInfo device;
+	foreach (QSerialPortInfo spi, QSerialPortInfo::availablePorts())
+	{
+		if (spi.vendorIdentifier() == vid && spi.productIdentifier() == pid)
+		{
+			device = spi;
+			setObjectName(device.description());
+			setPort(device);
+			if (! open(QIODevice::ReadWrite))
+			{
+				qWarning() << Q_FUNC_INFO << portName() << errorString();
+				return;
+			}
+			setBaudRate(baud);
+			setParity(QSerialPort::NoParity);
+			setDataBits(QSerialPort::Data8);
+			setFlowControl(QSerialPort::NoFlowControl);
+			return;
+		}
+	}
+	if (! device.isValid())
+	{
+		qWarning() << Q_FUNC_INFO << hex << vid << pid << hex << "not found";
+
+	}
+}
+
 QString IBSerialPort::device() const
 {
 	return QString("%1:%2").arg(portName()).arg(baudRate());
