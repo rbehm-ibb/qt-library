@@ -35,6 +35,11 @@ void LedIcon::setOnOff(bool on)
 	setPixmap(LedIconSource::pix(on).scaled(m_size, m_size));
 }
 
+void LedIcon::toggle()
+{
+	setOnOff(! m_on);
+}
+
 void LedIcon::setSize(int size)
 {
 	m_size = size;

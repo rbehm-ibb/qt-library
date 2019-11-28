@@ -39,6 +39,7 @@ public:
 public slots:
 	void setLed(LedIconSource::LedColor color);	///< show a LED with \param color
 	void setOnOff(bool on);		///< show a LED with on or off state
+	void toggle();
 private:
 	LedIconSource::LedColor m_color;
 	int m_size;

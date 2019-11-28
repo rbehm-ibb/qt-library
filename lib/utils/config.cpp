@@ -101,6 +101,11 @@ int Config::intValue(const char *key, int defaultValue)
 	return intValue(QString::fromLatin1(key), defaultValue);
 }
 
+int Config::boolValue(const char *key)
+{
+	return instance->m_conf->value(key).toBool();
+}
+
 qreal Config::realValue(const QString &key, qreal defaultValue)
 {
 	if (! i()->m_conf->contains(key) && ! qIsNaN(defaultValue))
