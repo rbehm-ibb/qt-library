@@ -27,6 +27,7 @@ public:
 	static QString stringValue(const char *key, const QString &defaultValue = QString());
 	static int intValue(const QString &key, int defaultValue = INT_MIN);
 	static int intValue(const char *key, int defaultValue = INT_MIN);
+	static int boolValue(const char *key);
 	static qreal realValue(const QString &key, qreal defaultValue = qQNaN());
 	static qreal realValue(const char *key, qreal defaultValue = qQNaN());
 
