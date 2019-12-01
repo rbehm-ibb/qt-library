@@ -18,14 +18,19 @@ IBSerialPort::IBSerialPort(QString device, int defaultBaud, QObject *parent)
 	init(device, defaultBaud);
 }
 
-IBSerialPort::IBSerialPort(quint16 vid, quint16 pid, int baud, QObject *parent)
+IBSerialPort::IBSerialPort(quint16 vid, quint16 pid, QString serNr, int baud, QObject *parent)
 	: QSerialPort(parent)
 {
 	QSerialPortInfo device;
 	foreach (QSerialPortInfo spi, QSerialPortInfo::availablePorts())
 	{
+//		qDebug() << Q_FUNC_INFO << hex << spi.portName() << spi.vendorIdentifier() << spi.productIdentifier() << spi.serialNumber();
 		if (spi.vendorIdentifier() == vid && spi.productIdentifier() == pid)
 		{
+			if (! serNr.isEmpty() && (spi.serialNumber() != serNr))
+			{
+				continue;
+			}
 			device = spi;
 			setObjectName(device.description());
 			setPort(device);
@@ -41,9 +46,9 @@ IBSerialPort::IBSerialPort(quint16 vid, quint16 pid, int baud, QObject *parent)
 			return;
 		}
 	}
-	if (! device.isValid())
+	if (! isOpen())
 	{
-		qWarning() << Q_FUNC_INFO << hex << vid << pid << hex << "not found";
+		qWarning() << Q_FUNC_INFO << hex << "VID" << vid << "PID" << pid << hex << "Ser#" << serNr << "not found";
 
 	}
 }

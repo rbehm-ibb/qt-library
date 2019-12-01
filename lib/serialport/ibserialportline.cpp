@@ -38,8 +38,8 @@ IBSerialPortLine::IBSerialPortLine(QString device, int defaultBaud, QObject *par
 	connect(m_rxTimer, &QTimer::timeout, this, &IBSerialPortLine::rxTimeoutSlot);
 }
 
-IBSerialPortLine::IBSerialPortLine(quint16 vid, quint16 pid, int baud, QObject *parent)
-	: IBSerialPort(vid, pid, baud, parent)
+IBSerialPortLine::IBSerialPortLine(quint16 vid, quint16 pid, QString serNr, int baud, QObject *parent)
+	: IBSerialPort(vid, pid, serNr, baud, parent)
 	, m_rxTimer(new QTimer(this))
 	, m_bol(QByteArray())
 	, m_eol(QByteArray("\n"))
