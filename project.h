@@ -98,6 +98,11 @@ using namespace std;
 #include <QWebView>
 #endif
 
+#ifdef QT_WEBENGINEWIDGETS_LIB
+#include <QWebEngineView>
+#include <QWebEngineHistory>
+#endif
+
 #ifdef QT_X11EXTRAS_LIB
 #include <QtX11Extras>
 #endif
