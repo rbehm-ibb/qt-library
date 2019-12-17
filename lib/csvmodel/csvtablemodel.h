@@ -13,7 +13,7 @@ class CsvTableModel : public QAbstractTableModel
 	Q_OBJECT
 public:
 	enum Option { NoOption = 0x00, WithHeader = 0x01, Trim = 0x02, Quoted = 0x04 };
-	Q_ENUM(Option)
+	Q_ENUMS(Option)
 	Q_DECLARE_FLAGS(Options, Option)
 	explicit CsvTableModel(QObject *parent = 0);
 	~CsvTableModel();
