@@ -34,6 +34,7 @@ void FilenameHandler::setExt(const QString &ext)
 	m_ext = ext;
 	if (! m_ext.startsWith('.'))
 		m_ext.prepend('.');
+	setFilename(m_fi.absoluteFilePath());
 }
 
 QFileInfo FilenameHandler::fi() const
