@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
 	{
 		const QString logo(":/logo/ibb-logo");
 		app.setProperty("copyright-icon", logo);
-		app.setWindowIcon(QIcon(logo));
+		app.setWindowIcon(QIcon(":/logo.png"));
 	}
 	{
 		QCommandLineParser parser;

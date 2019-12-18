@@ -137,7 +137,7 @@ void OsmTile::get(uint ix, uint iy, uint z)
 			   .arg(m_iy)
 			  );
 		url.setUrl(url.toEncoded());
-		url.setUrl(url.toEncoded());
+//		url.setUrl(url.toEncoded());
 		QUrlQuery qry;
 		qry.addQueryItem("access_token", Setting::i()->accessToken);
 		url.setQuery(qry);
