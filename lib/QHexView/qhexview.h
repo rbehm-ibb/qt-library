@@ -6,7 +6,7 @@ class QHexView: public QAbstractScrollArea
 {
 	Q_OBJECT
 public:
-	QHexView(QWidget *parent = 0);
+	QHexView(QWidget *parent = nullptr);
 
 	QByteArray data() const;
 

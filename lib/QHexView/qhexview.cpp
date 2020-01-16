@@ -12,7 +12,7 @@ QHexView::QHexView(QWidget *parent)
 {
 	setFont(QFont("Courier", 10));
 
-	m_charWidth = fontMetrics().width(QLatin1Char('9'));
+	m_charWidth = fontMetrics().horizontalAdvance("9");
 	m_charHeight = fontMetrics().height();
 
 	m_posAddr = 0;
