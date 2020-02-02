@@ -8,8 +8,8 @@
 #include "ledicon.h"
 
 LedIcon::LedIcon(QWidget *parent)
-    : QLabel(parent)
-      , m_on(false)
+	: QLabel(parent)
+	, m_on(false)
 {
 	QPixmap pm = LedIconSource::pix(LedIconSource::Off);
 	m_size = pm.width();
@@ -18,7 +18,7 @@ LedIcon::LedIcon(QWidget *parent)
 
 LedIcon::LedIcon(LedIconSource::LedColor color, QWidget *parent)
 	: QLabel(parent)
-      , m_on(false)
+	, m_on(false)
 {
 	setLed(color);
 }
@@ -32,7 +32,7 @@ void LedIcon::setLed(LedIconSource::LedColor color)
 void LedIcon::setOnOff(bool on)
 {
 	m_on = on;
-	setPixmap(LedIconSource::pix(on).scaled(m_size, m_size));
+	setPixmap(on ? LedIconSource::pix(m_color) : LedIconSource::pix(false).scaled(m_size, m_size));
 }
 
 void LedIcon::toggle()

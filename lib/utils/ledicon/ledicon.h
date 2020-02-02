@@ -29,12 +29,25 @@ public:
 	/// \param color the initial color to use
 	/// \param parent the usaula parent for Qidget
 	LedIcon(LedIconSource::LedColor color = LedIconSource::Off, QWidget *parent = nullptr);
-	LedIconSource::LedColor color() const { return m_color; }
+	LedIconSource::LedColor color() const
+	{
+		return m_color;
+	}
+	void setColor(LedIconSource::LedColor color)
+	{
+		m_color = color;
+	}
 
-	int size() const { return m_size; }
+	int size() const
+	{
+		return m_size;
+	}
 	void setSize(int size);
 
-	bool on() const { return m_on; }
+	bool on() const
+	{
+		return m_on;
+	}
 
 public slots:
 	void setLed(LedIconSource::LedColor color);	///< show a LED with \param color
