@@ -41,7 +41,7 @@ IBSerialPortLine::IBSerialPortLine(QString device, int defaultBaud, QObject *par
 IBSerialPortLine::IBSerialPortLine(quint16 vid, quint16 pid, QString serNr, int baud, QObject *parent)
 	: IBSerialPort(vid, pid, serNr, baud, parent)
 	, m_rxTimer(new QTimer(this))
-	, m_bol(QByteArray())
+	, m_bol(QByteArray("$"))
 	, m_eol(QByteArray("\n"))
 	, m_ignore(QByteArray("\r"))
 	, m_rxTimeoutMsec(1000)

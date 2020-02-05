@@ -55,13 +55,13 @@ public:
 	bool canReadLine() const { return ! m_lines.isEmpty(); }	///< any lines available?
 
 	void setBol(const QByteArray bol) { m_bol = bol; }		///< set the \param bol begin of line pattern.
-	void setBol(const quint8 bol) { m_bol = QByteArray(1, bol); }		///< set the \param bol begin of line pattern.
+	void setBol(const quint8 bol) { m_bol = QByteArray(1, static_cast<char>(bol)); }		///< set the \param bol begin of line pattern.
 	QByteArray bol() const { return m_bol; }			///< get the begin of line pattern.
 	void setEol(const QByteArray eol) { m_eol = eol; }		///< set the \param eol end of line pattern
-	void setEol(const quint8 eol) { m_eol = QByteArray(1, eol); }	///< set the \param eol end of line pattern.
+	void setEol(const quint8 eol) { m_eol = QByteArray(1, static_cast<char>(eol)); }	///< set the \param eol end of line pattern.
 	QByteArray eol() const { return m_eol; }			///< get the end of line pattern
 	void setIgnore(const QByteArray ignore) { m_ignore = ignore; }	///< set the pattern to be ignored
-	void setIgnore(const quint8 ignore) { m_ignore = QByteArray(1, ignore); } ///< set the pattern to be ignore
+	void setIgnore(const quint8 ignore) { m_ignore = QByteArray(1, static_cast<char>(ignore)); } ///< set the pattern to be ignore
 	void clrIgnore() { m_ignore = QByteArray(); }			///< reset ignore line pattern.
 	QByteArray ignore() const { return m_ignore; }			///< get the ignore pattern
 	void setMaxLineLength(int n) { m_maxLineLength = n; }		///< set the \param n max length of a line accepted
