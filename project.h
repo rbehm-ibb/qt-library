@@ -122,6 +122,10 @@ using namespace std;
 #include <QtBluetooth>
 #endif
 
+#ifdef QT_TEXTTOSPEECH_LIB
+#include <QTextToSpeech>
+#endif
+
 #ifdef QT_3DCORE_LIB
 #include <Qt3DCore>
 #endif
