@@ -11,7 +11,8 @@ LedIcon::LedIcon(QWidget *parent)
 	: QLabel(parent)
 	, m_on(false)
 {
-	QPixmap pm = LedIconSource::pix(LedIconSource::Off);
+	m_color = LedIconSource::Green;
+	QPixmap pm = LedIconSource::pix(LedIconSource::On);
 	m_size = pm.width();
 	setLed(LedIconSource::Off);
 }
@@ -32,7 +33,8 @@ void LedIcon::setLed(LedIconSource::LedColor color)
 void LedIcon::setOnOff(bool on)
 {
 	m_on = on;
-	setPixmap(on ? LedIconSource::pix(m_color) : LedIconSource::pix(false).scaled(m_size, m_size));
+	const QPixmap pm(on ? LedIconSource::pix(m_color) : LedIconSource::pix(false));
+	setPixmap(pm.scaled(m_size, m_size));
 }
 
 void LedIcon::toggle()

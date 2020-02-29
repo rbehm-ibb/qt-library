@@ -82,7 +82,7 @@ void IBToolBar::addQuit()
 	if (mw)
 	{
 		m_quit = addAction(QIcon(":/toolbarspacer/exit.svgz"), tr("Exit"), mw, SLOT(quit()));
-		m_quit->setShortcut(QKeySequence::Quit);
+		m_quit->setShortcut(QKeySequence("Ctrl+Q") /*::Quit*/);
 		m_quit->setObjectName("Quit-Action");
 		m_quit->setToolTip(m_quit->shortcut().toString() + " " + tr("Leave this program"));
 		m_quit->setWhatsThis(tr("Leave this program") + "\n" + m_quit->shortcut().toString());
@@ -108,7 +108,7 @@ void IBToolBar::aboutSlot()
 		     "<p>&copy; %3, %7 %4"
 		     "<p>Web: <a href=\"http://%5\">http://%5</a>"
 		     "<p>Mail: <a href=\"mailto:info@%5\">info@%5</a>"
-		     "<p>Using  <a href=\"http://qt.io\"><img src=\":/stdicons/qt-logo-about.png\"> %6</a>"
+		     "<p>Using  <a href=\"http://qt.io\"><img src=\":/stdicons/qt-logo-about.png\"> %6 on %7</a>"
 		    );
 	text = text
 	       .arg(qApp->applicationName())
@@ -117,6 +117,7 @@ void IBToolBar::aboutSlot()
 	       .arg(qApp->organizationName())
 	       .arg(qApp->organizationDomain())
 	       .arg(qVersion())
+	       .arg(QSysInfo::buildCpuArchitecture())
 	       .arg(copyIcon)
 	       ;
 	QMessageBox::about(parentWidget(), qApp->applicationName(), text);

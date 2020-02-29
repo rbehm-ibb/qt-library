@@ -6,7 +6,7 @@
 
 #include "lediconsource.h"
 
-LedIconSource * LedIconSource::instance = nullptr;
+LedIconSource *LedIconSource::instance = nullptr;
 
 LedIconSource *LedIconSource::i()
 {
@@ -50,8 +50,8 @@ void LedIconSource::setOnColor(LedIconSource::LedColor color)
 
 LedIconSource::LedIconSource()
 	: m_colors( { LedIconSource::None, LedIconSource::Off, LedIconSource::On,
-		    LedIconSource::Green, LedIconSource::Red,
-		    LedIconSource::Yellow, LedIconSource::Blue } )
+	LedIconSource::Green, LedIconSource::Red,
+	LedIconSource::Yellow, LedIconSource::Blue } )
 {
 	QPixmap none;
 	QPixmap off(":/led/LED_off.png");
