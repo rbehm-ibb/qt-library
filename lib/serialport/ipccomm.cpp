@@ -8,7 +8,8 @@
 #include "ibserialport.h"
 
 /// \brief The ControlChar enum defines the control chars used in the protocol.
-enum ControlChar {
+enum ControlChar
+{
 	STX = 'S',	///< The start of text
 	ETX = 'E',	///< The end of text
 	DLE = 'D',	///< data link escape
@@ -17,8 +18,8 @@ enum ControlChar {
 	WACK = 'W'	///< internal keep alive
 };
 
-const int RxCharTime = 10;	///< The inter message byte to byte timeouts.
-const int TxRespTime = 100;	///< The timeout for rx of a response.
+const int RxCharTime = 100;	///< The inter message byte to byte timeouts.
+const int TxRespTime = 1000;	///< The timeout for rx of a response.
 
 IpcCommThread::IpcCommThread(QString device, QObject *parent)
 	: QThread(parent)
