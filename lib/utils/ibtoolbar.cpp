@@ -105,7 +105,7 @@ void IBToolBar::aboutSlot()
 	}
 	QString text("<h1>%1</h1>"
 		     "<p>Version %2"
-		     "<p>&copy; %3, %7 %4"
+		     "<p>&copy; %3, %8 %4"
 		     "<p>Web: <a href=\"http://%5\">http://%5</a>"
 		     "<p>Mail: <a href=\"mailto:info@%5\">info@%5</a>"
 		     "<p>Using  <a href=\"http://qt.io\"><img src=\":/stdicons/qt-logo-about.png\"> %6 on %7</a>"
