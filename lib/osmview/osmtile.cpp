@@ -4,16 +4,14 @@
 // ******************************************************
 
 #include "osmtile.h"
+#include "config.h"
 
 // #define MAPBOX
-
-#ifdef MAPBOX
-#include "setting.h"
-#endif
 
 QNetworkAccessManager * OsmTile::m_networkManager = nullptr;
 QNetworkDiskCache *OsmTile::m_cache = nullptr;
 QString OsmTile::m_path;
+QString OsmTile::m_mapboxTileset("mapbox.streets-satellite");
 QString OsmTile::m_tileserver("tile.openstreetmap.org");
 bool OsmTile::m_fetchTiles = true;
 
@@ -131,7 +129,8 @@ void OsmTile::get(uint ix, uint iy, uint z)
 	{
 #ifdef MAPBOX
 		QUrl url;
-		url.setUrl(QString("https://api.mapbox.com/v4/mapbox.streets-satellite/%1/%2/%3.png")
+		url.setUrl(QString("https://api.mapbox.com/v4/%1/%2/%3/%4.png")
+			   .arg(m_mapboxTileset)
 			   .arg(m_zoom)
 			   .arg(m_ix)
 			   .arg(m_iy)
@@ -139,7 +138,7 @@ void OsmTile::get(uint ix, uint iy, uint z)
 		url.setUrl(url.toEncoded());
 //		url.setUrl(url.toEncoded());
 		QUrlQuery qry;
-		qry.addQueryItem("access_token", Setting::i()->accessToken);
+		qry.addQueryItem("access_token", Config::stringValue("mapbox/token"));
 		url.setQuery(qry);
 #else
 		static const QString tileName("http://%1/%2/%3/%4.png");
@@ -227,6 +226,9 @@ void OsmTile::error(QNetworkReply::NetworkError code)
 {
 	qDebug() << Q_FUNC_INFO << code;
 }
+
+
+
 
 
 
