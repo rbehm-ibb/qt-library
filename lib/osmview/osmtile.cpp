@@ -113,13 +113,13 @@ void  OsmTile::setParm(uint ix, uint iy, uint z)
 	m_zoom = static_cast<quint16>(z);
 	m_ix = ix;
 	m_iy = iy;
+	m_geoRect = calcRect(m_ix, m_iy, m_zoom);
 }
 
 void OsmTile::get(uint ix, uint iy, uint z)
 {
 	setParm(ix, iy, z);
 
-	m_geoRect = calcRect(m_ix, m_iy, m_zoom);
 	m_pix = QPixmap();
 	QString tag(QString("/%1/%2_%3").arg(z).arg(ix).arg(iy));
 	QString fileName(m_path + tag + ".png");
