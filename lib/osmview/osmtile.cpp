@@ -108,11 +108,16 @@ void OsmTile::get(QPointF tl, uint z)
 	get(long2tilex(tl.x(), z), lat2tiley(tl.y(), z), z);
 }
 
-void OsmTile::get(uint ix, uint iy, uint z)
+void  OsmTile::setParm(uint ix, uint iy, uint z)
 {
-	m_zoom = z;
+	m_zoom = static_cast<quint16>(z);
 	m_ix = ix;
 	m_iy = iy;
+}
+
+void OsmTile::get(uint ix, uint iy, uint z)
+{
+	setParm(ix, iy, z);
 
 	m_geoRect = calcRect(m_ix, m_iy, m_zoom);
 	m_pix = QPixmap();
@@ -125,7 +130,7 @@ void OsmTile::get(uint ix, uint iy, uint z)
 		emit loaded(this);
 //		pi = new QGraphicsPixmapItem(m_pix);
 	}
-	else if (m_fetchTiles)
+	else if (m_fetchTiles && m_zoom > 0 && m_zoom <= 18)
 	{
 #ifdef MAPBOX
 		QUrl url;

@@ -6,6 +6,7 @@ QT += gui widgets network
 INCLUDEPATH += . $$PWD
 
 SOURCES += \
+	$$PWD/mapscalewidget.cpp \
     $$PWD/osmview.cpp \
     $$PWD/osmtile.cpp \
     $$PWD/osmscene.cpp \
@@ -13,6 +14,7 @@ SOURCES += \
 #    $$PWD/mapscalewidget.cpp
 
 HEADERS += \
+	$$PWD/mapscalewidget.h \
     $$PWD/osmview.h \
     $$PWD/osmtile.h \
     $$PWD/osmscene.h \

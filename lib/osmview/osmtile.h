@@ -25,6 +25,7 @@ public:
 	static void setFetchTiles(bool fetchTiles) { m_fetchTiles = fetchTiles; }
 	void get(QPointF, uint z);
 	void get(uint ix, uint iy, uint z);
+	void setParm(uint ix, uint iy, uint z);
 	static QString getTileserver() { return m_tileserver; }
 	static void setTileserver(const QString &tileserver) { m_tileserver = tileserver; }
 	static QNetworkAccessManager *networkManager();
