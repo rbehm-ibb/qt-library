@@ -78,6 +78,7 @@ void OsmView::decZoom()
 
 void OsmView::setZoom(int z)
 {
+//	Q_UNUSED(z)
 	fill(m_center, qBound(0, 18, z));
 	emit changedTransform(transform());
 }
