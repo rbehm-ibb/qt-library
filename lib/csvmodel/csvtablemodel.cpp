@@ -266,7 +266,7 @@ void CsvTableModel::clear()
 	endResetModel();
 	if (! m_filename.isEmpty())
 	{
-		m_filename = QString::null;
+		m_filename = QString();
 		emit nameChanged(m_filename);
 	}
 }
