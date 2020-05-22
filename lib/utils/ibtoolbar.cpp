@@ -117,7 +117,7 @@ void IBToolBar::aboutSlot()
 	       .arg(qApp->organizationName())
 	       .arg(qApp->organizationDomain())
 	       .arg(qVersion())
-	       .arg(QSysInfo::buildCpuArchitecture())
+	       .arg(QSysInfo::buildCpuArchitecture() + " / " + QSysInfo::prettyProductName())
 	       .arg(copyIcon)
 	       ;
 	QMessageBox::about(parentWidget(), qApp->applicationName(), text);
