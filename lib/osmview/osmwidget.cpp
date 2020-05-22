@@ -183,14 +183,14 @@ void OsmWidget::mousePosOsmSlot(QPointF p)
 	int xm = abs(x) % 3600;
 	int xs = xm % 60;
 	xm /= 60;
-	QString sx;
-	sx = sx.asprintf("%d%c%02d'%02d\"", xd, symbol, xm, xs);
+	QString sx("%1%2%3'%4\"");
+	sx = sx.arg(xd).arg(symbol).arg(xm, 2, 10, QChar('0')).arg(xs, 2, 10, QChar('0'));
 	int yd = y / 3600;
 	int ym = abs(y) % 3600;
 	int ys = ym % 60;
 	ym /= 60;
-	QString sy;
-	sy = sy.asprintf("%d%c%02d'%02d\"", yd, symbol, ym, ys);
+	QString sy("%1%2%3'%4\"");
+	sy = sy.arg(yd).arg(symbol).arg(ym, 2, 10, QChar('0')).arg(ys, 2, 10, QChar('0'));
 
 	m_pos->setText(QString::fromLatin1("Pos: %1%2, %3%4 (%5,%6)").arg(p.x()).arg(symbol).arg(p.y()).arg(symbol).arg(sx).arg(sy));
 }
