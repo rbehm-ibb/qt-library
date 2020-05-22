@@ -177,8 +177,22 @@ void OsmWidget::mapHostActive(bool on)
 void OsmWidget::mousePosOsmSlot(QPointF p)
 {
 	static const QChar symbol(0x00B0);   // degrees symbol
+	long x = p.x()*60*60;
+	long y = p.y()*60*60;
+	int xd = x / 3600;
+	int xm = abs(x) % 3600;
+	int xs = xm % 60;
+	xm /= 60;
+	QString sx;
+	sx = sx.asprintf("%d%c%02d'%02d\"", xd, symbol, xm, xs);
+	int yd = y / 3600;
+	int ym = abs(y) % 3600;
+	int ys = ym % 60;
+	ym /= 60;
+	QString sy;
+	sy = sy.asprintf("%d%c%02d'%02d\"", yd, symbol, ym, ys);
 
-	m_pos->setText(QString::fromLatin1("Pos: %1%2, %3%4").arg(p.x()).arg(symbol).arg(p.y()).arg(symbol));
+	m_pos->setText(QString::fromLatin1("Pos: %1%2, %3%4 (%5,%6)").arg(p.x()).arg(symbol).arg(p.y()).arg(symbol).arg(sx).arg(sy));
 }
 
 
