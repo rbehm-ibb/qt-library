@@ -14,6 +14,7 @@ QString OsmTile::m_path;
 QString OsmTile::m_mapboxTileset("mapbox.streets-satellite");
 QString OsmTile::m_tileserver("tile.openstreetmap.org");
 bool OsmTile::m_fetchTiles = true;
+QByteArray OsmTile::m_userAgent/* = (qApp->applicationName() + " " + qApp->applicationVersion()).toLatin1()*/;
 
 static inline int long2tilex(double lon, uint z)
 {
@@ -151,7 +152,10 @@ void OsmTile::get(uint ix, uint iy, uint z)
 //		QNetworkRequest req(url);
 #endif
 		QNetworkRequest req(url);
-		req.setRawHeader("user-agent", (qApp->applicationName() + " " + qApp->applicationVersion()).toLatin1());
+		if (! m_userAgent.isEmpty())
+		{
+			req.setRawHeader("user-agent", m_userAgent);
+		}
 //		qDebug() << Q_FUNC_INFO << m_fetchTiles << url;
 		QNetworkReply *qnr = networkManager()->get(req);
 		connect(qnr, &QNetworkReply::finished, this, &OsmTile::dataLoaded);
@@ -231,6 +235,10 @@ void OsmTile::error(QNetworkReply::NetworkError code)
 {
 	qDebug() << Q_FUNC_INFO << code;
 }
+
+
+
+
 
 
 

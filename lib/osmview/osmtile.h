@@ -33,6 +33,9 @@ public:
 	static QString mapboxTileset() { return m_mapboxTileset; }
 	static void setMapboxTileset(const QString &mapboxTileset) { m_mapboxTileset = mapboxTileset; }
 
+	static QByteArray getUserAgent() { return m_userAgent; }
+	static void setUserAgent(const QString &userAgent) { m_userAgent = userAgent.toLatin1(); }
+
 signals:
 	void loaded(OsmTile *);
 
@@ -47,6 +50,7 @@ private:
 	static QString m_tileserver;
 	static QString m_mapboxTileset;
 	static bool m_fetchTiles;
+	static QByteArray m_userAgent;
 	QRectF m_geoRect;
 	quint16 m_zoom;
 	quint32 m_ix;
