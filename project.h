@@ -143,6 +143,12 @@ using namespace std;
 #include "qcustomplot.h"
 #endif
 
+#ifdef HAS_OSMWIDGET
+#include "osmwidget.h"
+#include "osmview.h"
+#include "osmscene.h"
+#include "osmtile.h"
+#endif
 
 #define dimof(x) (sizeof(x)/sizeof(x[0]))
 

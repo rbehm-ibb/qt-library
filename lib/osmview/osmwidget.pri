@@ -23,3 +23,5 @@ HEADERS += \
 
 RESOURCES += \
     $$PWD/osm_icons.qrc
+
+DEFINES += HAS_OSMWIDGET
