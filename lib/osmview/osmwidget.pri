@@ -1,11 +1,11 @@
 # copyright (C) 2015 by Reinhardt Behm/rbehm@hushmail.com
 # All Rights reserved
 
-QT += gui widgets network
+QT *= gui widgets network
 
-INCLUDEPATH += . $$PWD
+INCLUDEPATH *= . $$PWD
 
-SOURCES += \
+SOURCES *= \
 	$$PWD/mapscalewidget.cpp \
     $$PWD/osmview.cpp \
     $$PWD/osmtile.cpp \
@@ -13,7 +13,7 @@ SOURCES += \
     $$PWD/osmwidget.cpp \
 #    $$PWD/mapscalewidget.cpp
 
-HEADERS += \
+HEADERS *= \
 	$$PWD/mapscalewidget.h \
     $$PWD/osmview.h \
     $$PWD/osmtile.h \
@@ -21,7 +21,7 @@ HEADERS += \
     $$PWD/osmwidget.h \
 #    $$PWD/mapscalewidget.h
 
-RESOURCES += \
+RESOURCES *= \
     $$PWD/osm_icons.qrc
 
 DEFINES += HAS_OSMWIDGET

@@ -1,3 +1,2 @@
-INCLUDEPATH += $$PWD
-RESOURCES += \
-    $$PWD/stdicons.qrc
+INCLUDEPATH *= $$PWD
+RESOURCES *= $$PWD/stdicons.qrc
