@@ -9,6 +9,7 @@
 #define OSMWIDGET_H
 
 class OsmView;
+class OsmScene;
 class MapScaleWidget;
 
 #if 0
@@ -36,6 +37,7 @@ class OsmWidget : public QWidget
 public:
 	explicit OsmWidget(QWidget *parent = nullptr);
 	OsmView *view() const { return m_osmView; }
+	OsmScene *scene() const;
 	QList<QGraphicsItem *> items() const;
 	void addItem(QGraphicsItem *item);
 	static void setPath(QString path);
