@@ -8,12 +8,13 @@
 #include "osmwidget.h"
 #include "osmview.h"
 #include "osmtile.h"
+#include "osmscene.h"
 //#include "mapscalewidget.h"
 
 OsmWidget::OsmWidget(QWidget *parent)
 	: QWidget(parent)
 {
-	QVBoxLayout * layout = new QVBoxLayout(this);
+	QVBoxLayout *layout = new QVBoxLayout(this);
 	layout->setMargin(0);
 	layout->setSpacing(0);
 	layout->addWidget(m_toolbar = new QToolBar);
@@ -52,7 +53,7 @@ OsmWidget::OsmWidget(QWidget *parent)
 	qDebug() << Q_FUNC_INFO << p;
 #endif
 #if 0
-	QMainWindow *mw = qobject_cast<QMainWindow*>(p);
+	QMainWindow *mw = qobject_cast<QMainWindow *>(p);
 	if (mw)
 	{
 		mw->statusBar()->addPermanentWidget(posLabel());
@@ -63,7 +64,7 @@ OsmWidget::OsmWidget(QWidget *parent)
 #endif
 }
 
-OsmScene *OsmWidget::scene() const
+QGraphicsScene *OsmWidget::scene() const
 {
 	return view()->scene();
 }
@@ -182,8 +183,8 @@ void OsmWidget::mapHostActive(bool on)
 void OsmWidget::mousePosOsmSlot(QPointF p)
 {
 	static const QChar symbol(0x00B0);   // degrees symbol
-	long x = p.x()*60*60;
-	long y = p.y()*60*60;
+	long x = p.x() * 60 * 60;
+	long y = p.y() * 60 * 60;
 	int xd = x / 3600;
 	int xm = abs(x) % 3600;
 	int xs = xm % 60;
