@@ -148,6 +148,7 @@ using namespace std;
 #include "osmview.h"
 #include "osmscene.h"
 #include "osmtile.h"
+#include "mapscalewidget.h"
 #endif
 
 #define dimof(x) (sizeof(x)/sizeof(x[0]))
