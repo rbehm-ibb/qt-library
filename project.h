@@ -138,6 +138,9 @@ using namespace std;
 #include <Qt3DInput>
 #endif
 
+#ifdef QT_REMOTEOBJECTS_LIB
+#include <QtRemoteObjects>
+#endif
 
 #ifdef QCUSTOM_PLOT
 #include "qcustomplot.h"
