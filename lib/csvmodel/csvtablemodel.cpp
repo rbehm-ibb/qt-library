@@ -72,7 +72,7 @@ bool CsvTableModel::save(const QString dsn, Options options) const
 	}
 	if (options & WithHeader)
 	{
-		s << m_header.join(m_sep) << endl;
+		s << m_header.join(m_sep) << Qt::endl;
 	}
 	for (int row = 0; row < rowCount(); ++row)
 	{
@@ -88,7 +88,7 @@ bool CsvTableModel::save(const QString dsn, Options options) const
 				line += m_data[row][col];
 			}
 		}
-		s << line.join(m_sep) << endl;
+		s << line.join(m_sep) << Qt::endl;
 	}
 	return true;
 }
