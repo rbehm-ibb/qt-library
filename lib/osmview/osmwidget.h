@@ -57,6 +57,7 @@ public:
 	void setTileserver(const QString tileServer);
 	QString tileserver() const;
 	int zoom() const;
+	void clear();
 
 signals:
 	void centerChanged(QPointF center);

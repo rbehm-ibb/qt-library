@@ -144,6 +144,14 @@ int OsmWidget::zoom() const
 	return m_osmView->zoom();
 }
 
+void OsmWidget::clear()
+{
+	foreach (QGraphicsItem *item, items())
+	{
+		delete item;
+	}
+}
+
 void OsmWidget::setHome(QPointF p)
 {
 	m_homePos = p;
