@@ -39,13 +39,6 @@ static inline double tiley2lat(uint y, uint z)
 	return dy * 180.0 / M_PI;
 }
 
-#if 0
-n = 2 ^ zoom
-lon_deg = xtile / n * 360.0 - 180.0
-lat_rad = arctan(sinh(π * (1 - 2 * ytile / n)))
-lat_deg = lat_rad * 180.0 / π
-#endif
-
 OsmTile::OsmTile(QObject *parent)
 	: QObject(parent)
 //	, m_qnr(0)
@@ -250,4 +243,16 @@ void OsmTile::error(QNetworkReply::NetworkError code)
 bool OsmTile::setPix(const QString fn)
 {
 	return m_pix.load(fn);
+}
+
+QGraphicsPixmapItem *OsmTile::toGraphic(const QPixmap pm)
+{
+	QPixmap pix = pm.isNull() ? m_pix : pm;
+	QRectF r = m_geoRect.normalized();
+	QTransform t;
+	t.scale(r.width() / (pix.width() - 1), -r.height() / (pix.height() - 1));
+	QGraphicsPixmapItem *px = new QGraphicsPixmapItem(pix);
+	px->setTransform(t);
+	px->setPos(r.bottomLeft());
+	return px;
 }

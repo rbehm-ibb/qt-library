@@ -37,6 +37,7 @@ public:
 	static void setUserAgent(const QString &userAgent) { m_userAgent = userAgent.toLatin1(); }
 
 	bool setPix(const QString fn);
+	QGraphicsPixmapItem *toGraphic(const QPixmap pm = QPixmap());
 
 signals:
 	void loaded(OsmTile *);
