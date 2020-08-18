@@ -36,6 +36,8 @@ public:
 	static QByteArray getUserAgent() { return m_userAgent; }
 	static void setUserAgent(const QString &userAgent) { m_userAgent = userAgent.toLatin1(); }
 
+	bool setPix(const QString fn);
+
 signals:
 	void loaded(OsmTile *);
 
