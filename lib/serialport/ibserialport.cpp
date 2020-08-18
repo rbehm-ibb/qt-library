@@ -48,7 +48,7 @@ IBSerialPort::IBSerialPort(quint16 vid, quint16 pid, QString serNr, int baud, QO
 	}
 	if (! isOpen())
 	{
-		qWarning() << Q_FUNC_INFO << hex << "VID" << vid << "PID" << pid << hex << "Ser#" << serNr << "not found";
+		qWarning() << Q_FUNC_INFO << Qt::hex << "VID" << vid << "PID" << pid << "Ser#" << serNr << "not found" << Qt::dec;
 
 	}
 }
