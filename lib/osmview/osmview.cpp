@@ -28,9 +28,9 @@ OsmView::~OsmView()
 
 }
 
-QList<QGraphicsItem *> OsmView::items() const
+QList<QGraphicsItem *> OsmView::items(Qt::SortOrder order) const
 {
-	return m_scene->items();
+	return m_scene->items(order);
 }
 
 void OsmView::unselectAll()

@@ -47,10 +47,10 @@ QTransform OsmScene::trans(QPointF p, int z)
 	return trans;
 }
 
-QList<QGraphicsItem *> OsmScene::items() const
+QList<QGraphicsItem *> OsmScene::items(Qt::SortOrder order) const
 {
 	QList<QGraphicsItem *> list;
-	foreach (QGraphicsItem *item, QGraphicsScene::items())
+	foreach (QGraphicsItem *item, QGraphicsScene::items(order))
 	{
 		QGraphicsPixmapItem *pi = qgraphicsitem_cast<QGraphicsPixmapItem*>(item);
 		if (! m_tiles.values().contains(pi))

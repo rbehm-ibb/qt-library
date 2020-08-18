@@ -74,9 +74,9 @@ QGraphicsScene *OsmWidget::scene() const
 //	return osmView->scene();
 //}
 
-QList<QGraphicsItem *> OsmWidget::items() const
+QList<QGraphicsItem *> OsmWidget::items(Qt::SortOrder order) const
 {
-	return m_osmView->items();
+	return m_osmView->items(order);
 }
 
 void OsmWidget::addItem(QGraphicsItem *item)

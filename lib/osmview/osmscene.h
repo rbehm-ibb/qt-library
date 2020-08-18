@@ -16,7 +16,7 @@ public:
 	~OsmScene();
 	void fill(QRectF, int z);
 	QTransform trans(QPointF center, int z);
-	QList<QGraphicsItem *> items() const;
+	QList<QGraphicsItem *> items(Qt::SortOrder order = Qt::DescendingOrder) const;
 	void addItem(QGraphicsItem *item);
 signals:
 	void hostActive(bool);

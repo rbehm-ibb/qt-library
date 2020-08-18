@@ -38,7 +38,7 @@ public:
 	explicit OsmWidget(QWidget *parent = nullptr);
 	OsmView *view() const { return m_osmView; }
 	QGraphicsScene *scene() const;
-	QList<QGraphicsItem *> items() const;
+	QList<QGraphicsItem *> items(Qt::SortOrder order = Qt::DescendingOrder) const;
 	void addItem(QGraphicsItem *item);
 	static void setPath(QString path);
 	static QString path();

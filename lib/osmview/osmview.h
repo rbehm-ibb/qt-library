@@ -16,7 +16,7 @@ public:
 	~OsmView();
 	QPointF center() const { return m_center; }
 	QRectF geoRect() const { return mapToScene(rect()).boundingRect() /*m_geoRect*/; }
-	QList<QGraphicsItem *> items() const;
+	QList<QGraphicsItem *> items(Qt::SortOrder order = Qt::DescendingOrder) const;
 	void addItem(QGraphicsItem *item);
 	OsmScene *scene() const { return m_scene; }
 	void unselectAll();

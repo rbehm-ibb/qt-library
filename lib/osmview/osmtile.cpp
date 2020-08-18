@@ -32,9 +32,19 @@ static inline double tilex2lon(uint x, uint z)
 }
 static inline double tiley2lat(uint y, uint z)
 {
-	double n = M_PI - 2.0 * M_PI * y / pow(2.0, (int)z);
-	return 180.0 / M_PI * atan(0.5 * (exp(n) - exp(-n)));
+//	double n = M_PI - 2.0 * M_PI * y / pow(2.0, (int)z);
+//	return 180.0 / M_PI * atan(0.5 * (exp(n) - exp(-n)));
+	const double n = pow(2.0, (int)z);
+	double dy = atan(sinh(M_PI * (1 - 2 * y / n)));
+	return dy * 180.0 / M_PI;
 }
+
+#if 0
+n = 2 ^ zoom
+lon_deg = xtile / n * 360.0 - 180.0
+lat_rad = arctan(sinh(π * (1 - 2 * ytile / n)))
+lat_deg = lat_rad * 180.0 / π
+#endif
 
 OsmTile::OsmTile(QObject *parent)
 	: QObject(parent)
@@ -175,8 +185,9 @@ QNetworkAccessManager *OsmTile::networkManager()
 			setPath(m_path);	// create cache
 		}
 	}
-	return m_networkManager;
-}
+	  return m_networkManager;
+	  }
+
 
 void OsmTile::dataLoaded()
 {
@@ -236,14 +247,7 @@ void OsmTile::error(QNetworkReply::NetworkError code)
 	qDebug() << Q_FUNC_INFO << code;
 }
 
-
-
-
-
-
-
-
-
-
-
-
+bool OsmTile::setPix(const QString fn)
+{
+	return m_pix.load(fn);
+}
