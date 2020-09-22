@@ -46,7 +46,7 @@ bool CsvTableModel::read(const QString dsn, Options options)
 			emit error(msg.arg(f.fileName()).arg(f.errorString()));
 			return false;
 		}
-		header = expandLine(line, true);
+		header = expandLine(line.toUpper(), true);
 		m_colCount = header.count();
 		setHeader(header, options & WithHeader);
 	}
@@ -307,7 +307,7 @@ const QVector<int> CsvTableModel::columnIdx(const QStringList h) const
 	QVector<int> res;
 	foreach (const QString &s, h)
 	{
-		int idx  = m_header.indexOf(s);
+		int idx  = m_header.indexOf(s.toUpper());
 		res += idx;
 	}
 	return res;
