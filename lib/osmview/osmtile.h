@@ -39,6 +39,10 @@ public:
 	bool setPix(const QString fn);
 	QGraphicsPixmapItem *toGraphic(const QPixmap pm = QPixmap());
 
+	QGraphicsPixmapItem *pmi() const { return m_pmi; }
+	quint32 ix() const { return m_ix; }
+	quint32 iy() const { return m_iy; }
+
 signals:
 	void loaded(OsmTile *);
 
@@ -60,6 +64,7 @@ private:
 	quint32 m_iy;
 	QPixmap m_pix;
 	static QRectF calcRect(uint ix, uint iy, uint z);
+	QGraphicsPixmapItem *m_pmi;
 };
 
 

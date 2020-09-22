@@ -41,7 +41,7 @@ static inline double tiley2lat(uint y, uint z)
 
 OsmTile::OsmTile(QObject *parent)
 	: QObject(parent)
-//	, m_qnr(0)
+	, m_pmi(nullptr)
 {
 }
 
@@ -57,6 +57,7 @@ OsmTile::~OsmTile()
 	{
 //		qWarning() << Q_FUNC_INFO << m_qnr;
 	}
+	delete  m_pmi;
 }
 
 void OsmTile::setPath(QString path)
@@ -106,9 +107,11 @@ QRectF OsmTile::calcRect(uint ix, uint iy, uint z)
 	return r;
 }
 
+
+
 void OsmTile::get(QPointF tl, uint z)
 {
-//	qDebug() << Q_FUNC_INFO << idxFromCoord(tl, z);
+	//	qDebug() << Q_FUNC_INFO << idxFromCoord(tl, z);
 	get(long2tilex(tl.x(), z), lat2tiley(tl.y(), z), z);
 }
 
@@ -240,6 +243,8 @@ void OsmTile::error(QNetworkReply::NetworkError code)
 	qDebug() << Q_FUNC_INFO << code;
 }
 
+
+
 bool OsmTile::setPix(const QString fn)
 {
 	return m_pix.load(fn);
@@ -247,12 +252,16 @@ bool OsmTile::setPix(const QString fn)
 
 QGraphicsPixmapItem *OsmTile::toGraphic(const QPixmap pm)
 {
+	if (m_pmi)
+	{
+		return m_pmi;
+	}
 	QPixmap pix = pm.isNull() ? m_pix : pm;
 	QRectF r = m_geoRect.normalized();
 	QTransform t;
 	t.scale(r.width() / (pix.width() - 1), -r.height() / (pix.height() - 1));
-	QGraphicsPixmapItem *px = new QGraphicsPixmapItem(pix);
-	px->setTransform(t);
-	px->setPos(r.bottomLeft());
-	return px;
+	m_pmi = new QGraphicsPixmapItem(pix);
+	m_pmi->setTransform(t);
+	m_pmi->setPos(r.bottomLeft());
+	return m_pmi;
 }
