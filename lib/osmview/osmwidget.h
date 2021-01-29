@@ -57,7 +57,6 @@ public:
 	void setTileserver(const QString tileServer);
 	QString tileserver() const;
 	int zoom() const;
-	void clear();
 
 signals:
 	void centerChanged(QPointF center);
@@ -68,6 +67,7 @@ public slots:
 	void goHome();
 	void setCenter(QPointF p);
 	void setZoom(int z);
+	void clear();
 private slots:
 	void changedZoom(int z);
 	void mapHostActive(bool on);
