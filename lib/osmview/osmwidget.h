@@ -36,6 +36,7 @@ class OsmWidget : public QWidget
 	Q_PROPERTY(bool fetchTiles READ fetchTiles WRITE setFetchTiles)
 public:
 	explicit OsmWidget(QWidget *parent = nullptr);
+	~OsmWidget();
 	OsmView *view() const { return m_osmView; }
 	QGraphicsScene *scene() const;
 	QList<QGraphicsItem *> items(Qt::SortOrder order = Qt::DescendingOrder) const;
@@ -63,6 +64,7 @@ signals:
 	void centerChanged(QPointF center);
 	void changedTransform(const QTransform t);
 	void zoomChanged(int z);
+	void dying();
 public slots:
 	void setHome(QPointF p);
 	void goHome();
