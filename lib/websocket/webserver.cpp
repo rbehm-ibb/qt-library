@@ -18,7 +18,7 @@ WebServer::WebServer(quint16 port, QObject *parent)
 	}
 	else
 	{
-//		qDebug() << Q_FUNC_INFO << "listining on port" << port;
+		qDebug() << Q_FUNC_INFO << "listining on port" << port;
 		connect(m_server, &QWebSocketServer::newConnection, this, &WebServer::newConnection);
 		connect(m_server, &QWebSocketServer::acceptError, this, &WebServer::acceptError);
 		connect(m_server, &QWebSocketServer::serverError, this, &WebServer::serverError);
@@ -29,7 +29,7 @@ WebServer::WebServer(quint16 port, QObject *parent)
 
 WebServer::~WebServer()
 {
-//	qDebug() << Q_FUNC_INFO << this;
+	qDebug() << Q_FUNC_INFO << this;
 }
 
 void WebServer::addResource(WebResource *rsc)
@@ -39,6 +39,7 @@ void WebServer::addResource(WebResource *rsc)
 
 void WebServer::close()
 {
+	qDebug() << Q_FUNC_INFO << this;
 	if (m_server)
 	{
 		m_server->close();
@@ -48,10 +49,10 @@ void WebServer::close()
 void WebServer::newConnection()
 {
 	QWebSocket *socket = m_server->nextPendingConnection();
-//	qDebug() << Q_FUNC_INFO << socket;
+	qDebug() << Q_FUNC_INFO << socket;
 	if (socket)
 	{
-//		qDebug() << socket->peerName() << socket->peerPort() << socket->origin() << socket->resourceName();
+		qDebug() << socket->peerName() << socket->peerPort() << socket->origin() << socket->resourceName();
 		WebResource *rsc = findChild<WebResource*>(QUrl(socket->resourceName()).fileName());
 		if (rsc)
 		{
