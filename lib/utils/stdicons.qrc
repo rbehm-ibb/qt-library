@@ -34,5 +34,9 @@
         <file>stdicons/edit-cut.png</file>
         <file>stdicons/edit-paste.png</file>
         <file>stdicons/accept.png</file>
+        <file alias="cut">stdicons/cut.png</file>
+        <file alias="copy">stdicons/page_copy.png</file>
+        <file alias="delete">stdicons/page_delete.png</file>
+        <file alias="paste">stdicons/page_paste.png</file>
     </qresource>
 </RCC>

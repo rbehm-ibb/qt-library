@@ -64,6 +64,11 @@ OsmWidget::OsmWidget(QWidget *parent)
 #endif
 }
 
+OsmWidget::~OsmWidget()
+{
+	emit dying();
+}
+
 QGraphicsScene *OsmWidget::scene() const
 {
 	return view()->scene();
