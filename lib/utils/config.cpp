@@ -97,7 +97,7 @@ int Config::intValue(const QString &key, int defaultValue)
 	{
 		instance->m_conf->setValue(key, defaultValue);
 	}
-	return instance->m_conf->value(key, defaultValue).toInt();
+	return instance->m_conf->value(key, defaultValue).toString().toInt(nullptr, 0);
 }
 
 int Config::intValue(const char *key, int defaultValue)
