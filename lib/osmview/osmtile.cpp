@@ -70,7 +70,7 @@ void OsmTile::setPath(QString path)
 		{
 			m_cache = new QNetworkDiskCache();
 			m_cache->setCacheDirectory(QStandardPaths::standardLocations(QStandardPaths::CacheLocation).first());
-			qDebug() << m_cache->cacheDirectory() << m_networkManager;
+//			qDebug() << m_cache->cacheDirectory() << m_networkManager;
 			networkManager()->setCache(m_cache);
 		}
 	}
