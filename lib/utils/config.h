@@ -38,6 +38,8 @@ public:
 	static void setValue(const char *key, const QString &value);
 	static void setValue(const char *key, const char *value);
 	static void setValue(const QString &key, const int value);
+	static void setValue(const QString key, const uint value) { setValue(key, QVariant(value)); }
+	static void setValue(const char *key, const uint value) { setValue(key, QVariant(value)); }
 	static void setValue(const char *key, const int value);
 	static void setValue(const QString &key, const qreal value);
 	static void setValue(const char *key, const qreal value);
