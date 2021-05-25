@@ -12,7 +12,7 @@ OsmScene::OsmScene(QObject *parent)
 
 OsmScene::~OsmScene()
 {
-//	emit dying();
+	emit dying();
 }
 
 void OsmScene::mouseMoveEvent(QGraphicsSceneMouseEvent * mouseEvent)

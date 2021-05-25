@@ -25,7 +25,7 @@ OsmView::OsmView(QWidget *parent)
 
 OsmView::~OsmView()
 {
-
+	emit dying();
 }
 
 QList<QGraphicsItem *> OsmView::items(Qt::SortOrder order) const

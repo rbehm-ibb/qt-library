@@ -29,6 +29,7 @@ signals:
 	void hostActive(bool);
 	void selectionChanged();
 	void centerChanged(QPointF center);
+	void dying();
 public slots:
 	void incZoom();
 	void decZoom();

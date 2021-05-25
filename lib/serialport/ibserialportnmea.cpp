@@ -33,7 +33,7 @@ void IBSerialPortNmea::lineRxdSlot()
 			}
 			if (csum != checkSum)
 			{
-				qWarning() << Q_FUNC_INFO << objectName() << "error checksum" << hex << checkSum << "calc" << csum << oline << dec;
+				qWarning() << Q_FUNC_INFO << objectName() << "error checksum" << Qt::hex << checkSum << "calc" << csum << oline << Qt::dec;
 				emit chksumError(line);
 				continue;
 			}

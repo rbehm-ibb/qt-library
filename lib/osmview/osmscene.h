@@ -20,7 +20,7 @@ public:
 	void addItem(QGraphicsItem *item);
 signals:
 	void hostActive(bool);
-//	void dying();
+	void dying();
 public slots:
 private slots:
 	void tileLoaded(OsmTile *);
