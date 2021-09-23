@@ -11,10 +11,10 @@ LedIcon::LedIcon(QWidget *parent)
 	: QLabel(parent)
 	, m_on(false)
 {
-	m_color = LedIconSource::Green;
 	QPixmap pm = LedIconSource::pix(LedIconSource::On);
 	m_size = pm.width();
 	setLed(LedIconSource::Off);
+	m_color = LedIconSource::Green;
 }
 
 LedIcon::LedIcon(LedIconSource::LedColor color, QWidget *parent)
