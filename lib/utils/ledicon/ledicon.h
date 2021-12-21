@@ -28,7 +28,7 @@ public:
 	/// \brief Create a LedIcon
 	/// \param color the initial color to use
 	/// \param parent the usaula parent for Qidget
-	LedIcon(LedIconSource::LedColor color = LedIconSource::Off, QWidget *parent = nullptr);
+	LedIcon(LedIconSource::LedColor color = LedIconSource::Green, QWidget *parent = nullptr);
 	LedIconSource::LedColor color() const
 	{
 		return m_color;

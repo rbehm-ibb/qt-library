@@ -197,8 +197,8 @@ void OsmTile::dataLoaded()
 	}
 	if (qnr->error() != QNetworkReply::NoError)
 	{
-		if (qnr->error() != QNetworkReply::OperationCanceledError)
-			qWarning() << Q_FUNC_INFO << qnr->errorString() << qnr->url();
+//		if (qnr->error() != QNetworkReply::OperationCanceledError)
+//			qWarning() << Q_FUNC_INFO << qnr->errorString() << qnr->url();
 		qnr->close();
 		qnr->deleteLater();
 		qnr = 0;
@@ -240,7 +240,8 @@ void OsmTile::dataLoaded()
 
 void OsmTile::error(QNetworkReply::NetworkError code)
 {
-	qDebug() << Q_FUNC_INFO << code;
+	Q_UNUSED(code)
+//	qDebug() << Q_FUNC_INFO << code;
 }
 
 
