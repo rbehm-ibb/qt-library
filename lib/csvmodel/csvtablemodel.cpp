@@ -77,15 +77,16 @@ bool CsvTableModel::save(const QString dsn, Options options) const
 	for (int row = 0; row < rowCount(); ++row)
 	{
 		QStringList line;
-		for (int col = 0; col < columnCount(); ++col)
+		const QStringList &d = m_data[row];
+		for (int col = 0; col < d.count(); ++col)
 		{
 			if (options & Quoted)
 			{
-				line += "\"" + m_data[row][col] + "\"";
+				line += "\"" + d[col] + "\"";
 			}
 			else
 			{
-				line += m_data[row][col];
+				line += d[col];
 			}
 		}
 		s << line.join(m_sep) << Qt::endl;
@@ -276,7 +277,7 @@ void CsvTableModel::setHeader(const QStringList &h, bool fixCol)
 	m_header = h;
 	if (fixCol)
 	{
-		m_colCount = m_header.count();
+		m_colCount = h.count();
 	}
 	else
 	{
