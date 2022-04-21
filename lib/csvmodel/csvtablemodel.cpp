@@ -82,7 +82,9 @@ bool CsvTableModel::save(const QString dsn, Options options) const
 		{
 			if (options & Quoted)
 			{
-				line += "\"" + d[col] + "\"";
+				QString s = d[col];
+				s = s.replace("\"", "\"\"");
+				line += "\"" + s + "\"";
 			}
 			else
 			{
