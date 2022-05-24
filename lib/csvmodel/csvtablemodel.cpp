@@ -191,7 +191,7 @@ QStringList CsvTableModel::expandLine(QString line, bool trim)
 	State state = Idle;
 
 	QString field;
-	foreach (const QChar c, line)
+	foreach (const QChar &c, line)
 	{
 		switch (state)
 		{

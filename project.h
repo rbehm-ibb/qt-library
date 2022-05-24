@@ -18,6 +18,12 @@ using namespace std;
 #endif
 
 
+#if QT_VERSION >= 0x051502
+//namespace Qt {
+//	const char endl = '\n';
+//}
+#endif
+
 #ifdef QT_CORE_LIB
 #include <QtCore>
 #endif
