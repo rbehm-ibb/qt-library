@@ -3,5 +3,7 @@
 unused
 bin
 *.pro.user
+*.autosave
+.qmake.stash
 Makefile
 .build
