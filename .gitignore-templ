@@ -5,5 +5,6 @@ bin
 *.pro.user
 *.autosave
 .qmake.stash
+.qtc_clangd
 Makefile
 .build
