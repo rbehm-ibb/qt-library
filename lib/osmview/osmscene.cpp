@@ -135,7 +135,7 @@ void OsmScene::tileLoaded(OsmTile * osm)
 	}
 	else
 	{
-//		qWarning() << Q_FUNC_INFO << "unneeded Tile" << ttag;
+		qWarning() << Q_FUNC_INFO << "unneeded Tile" << ttag;
 	}
 	osm->deleteLater();
 	bool anyRequest = false;

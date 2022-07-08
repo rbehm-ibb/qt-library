@@ -99,6 +99,11 @@ QString OsmWidget::path()
 	return OsmTile::path();
 }
 
+void OsmWidget::setUserAgent(QString agent)
+{
+	OsmTile::setUserAgent(agent);
+}
+
 void OsmWidget::setFetchTiles(bool fetchTiles)
 {
 	OsmTile::setFetchTiles(fetchTiles);
