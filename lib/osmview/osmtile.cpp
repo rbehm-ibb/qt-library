@@ -14,7 +14,7 @@ QString OsmTile::m_path;
 QString OsmTile::m_mapboxTileset("mapbox.streets-satellite");
 QString OsmTile::m_tileserver("tile.openstreetmap.org");
 bool OsmTile::m_fetchTiles = true;
-QByteArray OsmTile::m_userAgent/* = (qApp->applicationName() + " " + qApp->applicationVersion()).toLatin1()*/;
+QByteArray OsmTile::m_userAgent = (qApp->applicationName() + " " + qApp->applicationVersion()).toLatin1();
 
 static inline int long2tilex(double lon, uint z)
 {
@@ -111,7 +111,7 @@ QRectF OsmTile::calcRect(uint ix, uint iy, uint z)
 
 void OsmTile::get(QPointF tl, uint z)
 {
-	//	qDebug() << Q_FUNC_INFO << idxFromCoord(tl, z);
+//	qDebug() << Q_FUNC_INFO << idxFromCoord(tl, z);
 	get(long2tilex(tl.x(), z), lat2tiley(tl.y(), z), z);
 }
 
@@ -160,10 +160,13 @@ void OsmTile::get(uint ix, uint iy, uint z)
 		QNetworkRequest req(url);
 		if (! m_userAgent.isEmpty())
 		{
-			req.setRawHeader("user-agent", m_userAgent);
+//			req.setRawHeader("user-agent", m_userAgent);
+			req.setHeader(QNetworkRequest::UserAgentHeader, m_userAgent);
 		}
-//		qDebug() << Q_FUNC_INFO << m_fetchTiles << url;
+//		qDebug() << Q_FUNC_INFO << m_fetchTiles << url << req.header(QNetworkRequest::UserAgentHeader);
+
 		QNetworkReply *qnr = networkManager()->get(req);
+//		qDebug() << qnr->rawHeaderPairs();
 		connect(qnr, &QNetworkReply::finished, this, &OsmTile::dataLoaded);
 		connect(qnr, SIGNAL(error(QNetworkReply::NetworkError)), this, SLOT(error(QNetworkReply::NetworkError)));
 		m_qnr = qnr;
@@ -188,7 +191,7 @@ QNetworkAccessManager *OsmTile::networkManager()
 void OsmTile::dataLoaded()
 {
 	QNetworkReply *qnr = qobject_cast<QNetworkReply*>(sender());
-//	qDebug() << Q_FUNC_INFO << qnr;
+//	qDebug() << Q_FUNC_INFO << qnr << qnr->rawHeaderPairs();
 	if (! qnr)
 	{
 		qDebug() << Q_FUNC_INFO << "Undef";
@@ -241,7 +244,9 @@ void OsmTile::dataLoaded()
 void OsmTile::error(QNetworkReply::NetworkError code)
 {
 	Q_UNUSED(code)
-//	qDebug() << Q_FUNC_INFO << code;
+	QNetworkReply *qnr = qobject_cast<QNetworkReply*>(sender());
+	qDebug() << Q_FUNC_INFO << code << qnr->url();
+	qnr->deleteLater();
 }
 
 
