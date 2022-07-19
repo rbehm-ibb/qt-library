@@ -39,5 +39,6 @@
         <file alias="delete">stdicons/page_delete.png</file>
         <file alias="paste">stdicons/page_paste.png</file>
         <file>stdicons/datafilterstandardfilter.svg</file>
+        <file>stdicons/eye.png</file>
     </qresource>
 </RCC>
