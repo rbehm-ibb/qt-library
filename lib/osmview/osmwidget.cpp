@@ -9,11 +9,16 @@
 #include "osmview.h"
 #include "osmtile.h"
 #include "osmscene.h"
+#include "config.h"
 //#include "mapscalewidget.h"
 
 OsmWidget::OsmWidget(QWidget *parent)
 	: QWidget(parent)
 {
+	setContextMenuPolicy(Qt::ActionsContextMenu);
+	QAction * actSave = new QAction(QIcon(":/doc-save"), "Save Setting", this);
+	addAction(actSave);
+	connect(actSave, &QAction::triggered, this, &OsmWidget::saveOsmSettings);
 	QVBoxLayout *layout = new QVBoxLayout(this);
 	layout->setMargin(0);
 	layout->setSpacing(0);
@@ -154,6 +159,13 @@ int OsmWidget::zoom() const
 	return m_osmView->zoom();
 }
 
+void OsmWidget::loadSettings()
+{
+	setUserAgent((qApp->applicationName() + " " + qApp->applicationVersion()).toLatin1());
+	setZoom(Config::intValue("/map/zoom"));
+	setHome(QPointF(Config::value("/map/home").toPoint()) * 1e-5);
+}
+
 void OsmWidget::clear()
 {
 	foreach (QGraphicsItem *item, items())
@@ -218,7 +230,11 @@ void OsmWidget::mousePosOsmSlot(QPointF p)
 	m_pos->setText(QString::fromLatin1("Pos: %1%2, %3%4 (%5,%6)").arg(p.x()).arg(symbol).arg(p.y()).arg(symbol).arg(sx).arg(sy));
 }
 
-
+void OsmWidget::saveOsmSettings()
+{
+	Config::setValue("/map/zoom", zoom());
+	Config::setValue("/map/home", (center() * 1e5).toPoint());
+}
 
 
 

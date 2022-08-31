@@ -59,6 +59,7 @@ public:
 	void setTileserver(const QString tileServer);
 	QString tileserver() const;
 	int zoom() const;
+	void loadSettings();
 
 signals:
 	void centerChanged(QPointF center);
@@ -75,7 +76,7 @@ private slots:
 	void changedZoom(int z);
 	void mapHostActive(bool on);
 	void mousePosOsmSlot(QPointF p);
-
+	void saveOsmSettings();
 private:
 	QToolBar *m_toolbar;
 	OsmView *m_osmView;
