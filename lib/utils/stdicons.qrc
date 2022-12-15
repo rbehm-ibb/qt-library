@@ -40,5 +40,6 @@
         <file alias="paste">stdicons/page_paste.png</file>
         <file>stdicons/datafilterstandardfilter.svg</file>
         <file>stdicons/eye.png</file>
+        <file>stdicons/launch.svgz</file>
     </qresource>
 </RCC>
