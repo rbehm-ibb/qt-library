@@ -6,6 +6,7 @@
 #ifndef PROJECT_H
 #define PROJECT_H
 
+#include <cstdint>
 #include <unistd.h>
 #include <math.h>
 #include <sys/stat.h>
