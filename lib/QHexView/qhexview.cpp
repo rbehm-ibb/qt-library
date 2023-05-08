@@ -51,6 +51,12 @@ void QHexView::showFromOffset(int offset)
 	}
 }
 
+void QHexView::setIndex(int idx)
+{
+	setCursorPos(idx);
+	ensureVisible();
+}
+
 void QHexView::clear()
 {
 	verticalScrollBar()->setValue(0);

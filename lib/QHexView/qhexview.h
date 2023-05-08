@@ -17,6 +17,7 @@ public slots:
 	void setData(const QByteArray &arr);
 	void clear();
 	void showFromOffset(int offset);
+	void setIndex(int idx);
 
 protected:
 	void paintEvent(QPaintEvent *event);
