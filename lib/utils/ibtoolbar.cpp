@@ -104,21 +104,23 @@ void IBToolBar::aboutSlot()
 		copyIcon =  "<img height=20 src=\"" + copyr.toString() + "\">";
 	}
 	QString text("<h1>%1</h1>"
-		     "<p>Version %2"
-		     "<p>&copy; %3, %8 %4"
-		     "<p>Web: <a href=\"http://%5\">http://%5</a>"
-		     "<p>Mail: <a href=\"mailto:info@%5\">info@%5</a>"
-		     "<p>Using  <a href=\"http://qt.io\"><img src=\":/stdicons/qt-logo-about.png\"> %6 on %7</a>"
+		     "<h2>%3</h2>"
+		     "<h3>Version %2</h3>"
+		     "<p>&copy; %4, %5 %6"
+		     "<p>Web: <a href=\"http://%6\">http://%6</a>"
+		     "<p>Mail: <a href=\"mailto:info@%5\">info@%6</a>"
+		     "<p>Using  <a href=\"http://qt.io\"><img src=\":/stdicons/qt-logo-about.png\"> %9 on %8</a>"
 		    );
 	text = text
 	       .arg(qApp->applicationName())
 	       .arg(qApp->applicationVersion())
+	       .arg(qApp->applicationDisplayName())
+		       .arg(copyIcon)
 	       .arg(QString(__DATE__).section(' ', -1, -1))
 	       .arg(qApp->organizationName())
 	       .arg(qApp->organizationDomain())
 	       .arg(qVersion())
 	       .arg(QSysInfo::buildCpuArchitecture() + " / " + QSysInfo::prettyProductName())
-	       .arg(copyIcon)
 	       ;
 	QMessageBox::about(parentWidget(), qApp->applicationName(), text);
 }
