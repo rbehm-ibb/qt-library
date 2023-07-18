@@ -42,6 +42,7 @@ IBSerialPort::IBSerialPort(quint16 vid, quint16 pid, QString serNr, int baud, QO
 			setBaudRate(baud);
 			setParity(QSerialPort::NoParity);
 			setDataBits(QSerialPort::Data8);
+			setStopBits(QSerialPort::TwoStop);
 			setFlowControl(QSerialPort::NoFlowControl);
 			return;
 		}
