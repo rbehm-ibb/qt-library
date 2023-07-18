@@ -43,7 +43,7 @@ void ZConfTable::setData(int row, const ZConfItem &d)
 
 void ZConfTable::addItem(const ZConfItem &d)
 {
-//	qDebug() << Q_FUNC_INFO << d;
+	qDebug() << Q_FUNC_INFO << d;
 	int irow = -1;
 	for (int i =  0; i < rowCount(); ++i)
 	{

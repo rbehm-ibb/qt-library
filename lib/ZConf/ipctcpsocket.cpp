@@ -46,7 +46,7 @@ void IpcTcpSocket::send(quint8 signature, const QByteArray data)
 {
 	if (isConnected())
 	{
-//		qDebug()  << Q_FUNC_INFO << m_name << signature << data.size();
+		qDebug()  << Q_FUNC_INFO << signature << data.size();
 		write((const char*)&signature, sizeof(signature));
 		quint16 size = data.size();
 		write((const char*)&size, sizeof(size));
@@ -142,6 +142,6 @@ void IpcTcpSocket::timeout()
 
 void IpcTcpSocket::stateChanged(QAbstractSocket::SocketState socketState)
 {
-//	qDebug() << Q_FUNC_INFO << socketState;
+	qDebug() << Q_FUNC_INFO << socketState;
 }
 

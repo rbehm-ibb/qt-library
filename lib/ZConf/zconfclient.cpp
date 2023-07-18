@@ -72,7 +72,7 @@ void ZconfClient::stateChangedUdp(QAbstractSocket::SocketState socketState)
 
 void ZconfClient::readyReadUdp()
 {
-//	qDebug() << Q_FUNC_INFO;
+	qDebug() << Q_FUNC_INFO;
 	while (m_udp->hasPendingDatagrams())
 	{
 		QNetworkDatagram dgram = m_udp->receiveDatagram();
@@ -80,7 +80,7 @@ void ZconfClient::readyReadUdp()
 		d = d.replace("\n", "");
 		d = d.replace("\r", "");
 		QHostAddress srcIp = dgram.senderAddress();
-//		qDebug() << Q_FUNC_INFO << srcIp << d;
+		qDebug() << Q_FUNC_INFO << srcIp << d;
 		emit rxd(QString("Rx %1:%2 -> %4:%5 <%3>")
 			 .arg(srcIp.toString())
 			 .arg(dgram.senderPort())
@@ -111,6 +111,7 @@ void ZconfClient::readyReadUdp()
 				connect(m_tcp, &IpcTcpSocket::connectStateChanged, this, &ZconfClient::connectState);
 				m_synch->setSocket(m_tcp);
 				m_tcp->connectToHost(dgram.senderAddress(), port);
+				qDebug() << Q_FUNC_INFO <<dgram.senderAddress() << port;
 			}
 			else
 			{
