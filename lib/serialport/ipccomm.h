@@ -7,6 +7,8 @@
 #ifndef IPCCOMM_H
 #define IPCCOMM_H
 
+extern bool verbose;
+
 class IBSerialPort;
 
 class IpcComm;

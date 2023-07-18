@@ -25,7 +25,7 @@ IpcCommThread::IpcCommThread(QString device, QObject *parent)
 	: QThread(parent)
 	, m_device(device)
 {
-//	qDebug() << Q_FUNC_INFO << device;
+	qDebug() << Q_FUNC_INFO << device;
 }
 
 IpcCommThread::~IpcCommThread()
@@ -108,7 +108,7 @@ bool IpcComm::txData(const QByteArray d)
 		qWarning() << Q_FUNC_INFO << "too large" << d.size();
 		return false;
 	}
-//	qDebug() << Q_FUNC_INFO << d.toHex();
+	qDebug() << Q_FUNC_INFO << d.toHex(' ');
 	if (m_txQueue.size() >= 10)
 	{
 		qWarning() << Q_FUNC_INFO << "tx OV";
@@ -126,10 +126,11 @@ bool IpcComm::txData(const QByteArray d)
 void IpcComm::rxReady()
 {
 	QByteArray rx = m_port->readAll();
-//	if (verbose) qDebug() << Q_FUNC_INFO << rx.size() << rx.toHex();
+	if (verbose) qDebug() << Q_FUNC_INFO << rx.size() << rx.toHex(' ') << m_rxStateName;
 	for (int i = 0; i < rx.size(); ++i)
 	{
 		quint8 rxc = rx.at(i);
+		if (verbose) qDebug() << Q_FUNC_INFO << Qt::hex << rxc << Qt::dec << m_rxStateName;
 		(this->*m_rxState)(rxc);
 	}
 }
@@ -142,14 +143,17 @@ void IpcComm::txPoll()
 	{
 		if (m_rxdResponse)
 		{
+			qDebug() << Q_FUNC_INFO << Qt::hex  << m_rxdResponse << Qt::dec;
 			switch (m_rxdResponse)
 			{
 			case ACK:
+				qDebug() << Q_FUNC_INFO << "ACK";
 				m_hasTxBuffer = false;
 				m_txTimer->stop();
 				m_waitResp = false;
 				break;
 			case WACK:
+				qDebug() << Q_FUNC_INFO << "WACK";
 				m_txTimer->start(TxRespTime);
 				break;
 			case NAK:
@@ -218,7 +222,7 @@ void IpcComm::timeoutTx()
 	m_waitResp = false;
 	txPoll();
 	emit error("Tx Timeout");
-//	qDebug() << Q_FUNC_INFO << m_rxStateName << m_rxdResponse << m_waitResp;
+	qDebug() << Q_FUNC_INFO << m_rxStateName << m_rxdResponse << m_waitResp;
 }
 
 void IpcComm::rxIdle(quint8 rxd)
@@ -284,7 +288,7 @@ void IpcComm::rxDle(quint8 rxd)
 
 void IpcComm::rxCrc(quint8 rxd)
 {
-//	qDebug() << Q_FUNC_INFO << hex << rxd << dec;
+	qDebug() << Q_FUNC_INFO << Qt::hex << rxd << m_rxSum << Qt::dec;
 	m_rxState = &IpcComm::rxIdle;
 	m_rxStateName = "rxIdle";
 	m_rxTimer->stop();
