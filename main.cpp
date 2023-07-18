@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
 	app.setApplicationName("resource-view");
 	app.setApplicationVersion("V0.1");
 	app.setOrganizationDomain("ibb-aviotec.com");
-	app.setOrganizationName("IBB-aviotec");
+	app.setOrganizationName("IBB-aviotec.com");
 	QString fileName;
 	{
 		const QString logo(":/logo/ibb-logo");
