@@ -108,8 +108,8 @@ void IBToolBar::aboutSlot()
 		     "<h3>Version %2</h3>"
 		     "<p>&copy; %4, %5 %6"
 		     "<p>Web: <a href=\"http://%6\">http://%6</a>"
-		     "<p>Mail: <a href=\"mailto:info@%5\">info@%6</a>"
-		     "<p>Using  <a href=\"http://qt.io\"><img src=\":/stdicons/qt-logo-about.png\"> %9 on %8</a>"
+		     "<p>Mail: <a href=\"mailto:info@%5\">info@%7</a>"
+		     "<p>Using  <a href=\"http://qt.io\"><img src=\":/stdicons/qt-logo-about.png\"> %8</a> on %9"
 		    );
 	text = text
 	       .arg(qApp->applicationName())
