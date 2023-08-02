@@ -5,6 +5,7 @@
 // ******************************************************
 
 #include "ibtoolbar.h"
+#include "maximizev.h"
 
 IBToolBar::IBToolBar(QWidget *parent)
 	: QToolBar(parent)
@@ -63,6 +64,7 @@ void IBToolBar::addAbout()
 //		addAction(m_what);
 //		m_what->setStatusTip(tr("Whats this?"));
 //	}
+	addAction(new MaximizeV(parentWidget()));
 	m_about = addAction(QIcon(":/toolbarspacer/info.svgz"), tr("&About"));
 //	m_about = addAction(QIcon(":/qt-project.org/styles/commonstyle/images/fileinfo-32.png"), tr("&About"));
 	m_about->setToolTip(tr("Information about this program"));

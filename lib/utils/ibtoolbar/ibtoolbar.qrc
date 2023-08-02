@@ -2,5 +2,6 @@
     <qresource prefix="/toolbarspacer">
         <file>info.svgz</file>
         <file>exit.svgz</file>
+        <file>top.svgz</file>
     </qresource>
 </RCC>
