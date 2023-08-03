@@ -11,9 +11,9 @@ IBToolBar::IBToolBar(QWidget *parent)
 	: QToolBar(parent)
 	, m_quit(nullptr)
 	, m_about(nullptr)
-	, m_what(nullptr)
-	, m_maximizeV(nullptr)
-	, m_noWhat(false)
+//	, m_what(nullptr)
+	, m_whatis(false)
+	, m_maximzeV(true)
 {
 	addQuit();
 }
@@ -22,33 +22,24 @@ IBToolBar::~IBToolBar()
 {
 }
 
-QAction *IBToolBar::about()
-{
-	if (! m_about)
-	{
-		addAbout();
-	}
-	return m_about;
-}
+//QAction *IBToolBar::about()
+//{
+//	if (! m_about)
+//	{
+//		addAbout();
+//	}
+//	return m_about;
+//}
 
-void IBToolBar::removeWhatis()
-{
-	if (m_what)
-	{
-		delete m_what;
-		m_what = nullptr;
-	}
-	m_noWhat = true;
-}
-
-void IBToolBar::removeMaximizeV()
-{
-	if (m_maximizeV)
-	{
-		delete m_maximizeV;
-		m_maximizeV = nullptr;
-	}
-}
+//void IBToolBar::removeWhatis()
+//{
+//	if (m_what)
+//	{
+//		delete m_what;
+//		m_what = nullptr;
+//	}
+//	m_noWhat = true;
+//}
 
 bool IBToolBar::event(QEvent *e)
 {
@@ -63,19 +54,24 @@ bool IBToolBar::event(QEvent *e)
 	return QToolBar::event(e);
 }
 
+
+
 void IBToolBar::addAbout()
 {
 	QWidget *tbs = new QWidget;
 	tbs->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Preferred);
 	addWidget(tbs);
-//	if (! m_noWhat)
-//	{
-//		m_what = QWhatsThis::createAction(this);
-//		addAction(m_what);
-//		m_what->setStatusTip(tr("Whats this?"));
-//	}
-	m_maximizeV = new MaximizeV(parentWidget());
-	addAction(m_maximizeV);
+	if (m_whatis)
+	{
+		QAction *m_what = QWhatsThis::createAction(this);
+		addAction(m_what);
+		m_what->setStatusTip(tr("Whats this?"));
+	}
+	if (m_maximzeV)
+	{
+		MaximizeV *mact = new MaximizeV(parentWidget());
+		addAction(mact);
+	}
 	m_about = addAction(QIcon(":/toolbarspacer/info.svgz"), tr("&About"));
 //	m_about = addAction(QIcon(":/qt-project.org/styles/commonstyle/images/fileinfo-32.png"), tr("&About"));
 	m_about->setToolTip(tr("Information about this program"));

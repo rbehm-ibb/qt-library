@@ -12,15 +12,20 @@
 class IBToolBar : public QToolBar
 {
 	Q_OBJECT
+	Q_PROPERTY(bool m_maximzeV READ maximzeV WRITE setMaximzeV)
+	Q_PROPERTY(bool m_whatis READ whatis WRITE setWhatis)
 public:
 	explicit IBToolBar(QWidget *parent = nullptr);
 	~IBToolBar();
 	QAction *quit() const { return m_quit; }
-	QAction *about();
-	void removeWhatis();
-	void removeMaximizeV();
-public:
+//	QAction *about();
 	virtual bool event(QEvent *e);
+
+	void setMaximzeV(bool newNoMaximzeV) { m_maximzeV = newNoMaximzeV; }
+	bool maximzeV() const { return m_maximzeV; }
+
+	bool whatis() const { return m_whatis; }
+	void setWhatis(bool newWhatis) { m_whatis = newWhatis; }
 
 signals:
 
@@ -31,9 +36,9 @@ protected:
 private:
 	QAction *m_quit;
 	QAction *m_about;
-	QAction *m_what;
-	QAction *m_maximizeV;
-	bool m_noWhat;
+//	QAction *m_what;
+	bool m_whatis;
+	bool m_maximzeV;
 
 	void addAbout();
 	void addQuit();
