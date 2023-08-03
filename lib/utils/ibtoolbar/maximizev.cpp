@@ -9,6 +9,7 @@
 MaximizeV::MaximizeV(QObject *parent)
 	: QAction{parent}
 {
+	setObjectName("maximizeV");
 	setIcon(QIcon(":/toolbarspacer/top.svgz"));
 	setStatusTip(tr("Maximize vertically"));
 	connect(this, &QAction::triggered, this, &MaximizeV::trigged);

@@ -18,7 +18,7 @@ public:
 	explicit IBToolBar(QWidget *parent = nullptr);
 	~IBToolBar();
 	QAction *quit() const { return m_quit; }
-//	QAction *about();
+	QAction *about();
 	virtual bool event(QEvent *e);
 
 	void setMaximzeV(bool newNoMaximzeV) { m_maximzeV = newNoMaximzeV; }
@@ -36,7 +36,6 @@ protected:
 private:
 	QAction *m_quit;
 	QAction *m_about;
-//	QAction *m_what;
 	bool m_whatis;
 	bool m_maximzeV;
 
