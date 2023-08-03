@@ -7,6 +7,8 @@
 #ifndef IBTOOLBAR_H
 #define IBTOOLBAR_H
 
+#include <QToolBar>
+
 class IBToolBar : public QToolBar
 {
 	Q_OBJECT
@@ -16,6 +18,7 @@ public:
 	QAction *quit() const { return m_quit; }
 	QAction *about();
 	void removeWhatis();
+	void removeMaximizeV();
 public:
 	virtual bool event(QEvent *e);
 
@@ -29,6 +32,7 @@ private:
 	QAction *m_quit;
 	QAction *m_about;
 	QAction *m_what;
+	QAction *m_maximizeV;
 	bool m_noWhat;
 
 	void addAbout();

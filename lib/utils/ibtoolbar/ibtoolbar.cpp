@@ -12,6 +12,7 @@ IBToolBar::IBToolBar(QWidget *parent)
 	, m_quit(nullptr)
 	, m_about(nullptr)
 	, m_what(nullptr)
+	, m_maximizeV(nullptr)
 	, m_noWhat(false)
 {
 	addQuit();
@@ -40,6 +41,15 @@ void IBToolBar::removeWhatis()
 	m_noWhat = true;
 }
 
+void IBToolBar::removeMaximizeV()
+{
+	if (m_maximizeV)
+	{
+		delete m_maximizeV;
+		m_maximizeV = nullptr;
+	}
+}
+
 bool IBToolBar::event(QEvent *e)
 {
 	//	qDebug() << Q_FUNC_INFO << e;
@@ -64,7 +74,8 @@ void IBToolBar::addAbout()
 //		addAction(m_what);
 //		m_what->setStatusTip(tr("Whats this?"));
 //	}
-	addAction(new MaximizeV(parentWidget()));
+	m_maximizeV = new MaximizeV(parentWidget());
+	addAction(m_maximizeV);
 	m_about = addAction(QIcon(":/toolbarspacer/info.svgz"), tr("&About"));
 //	m_about = addAction(QIcon(":/qt-project.org/styles/commonstyle/images/fileinfo-32.png"), tr("&About"));
 	m_about->setToolTip(tr("Information about this program"));
