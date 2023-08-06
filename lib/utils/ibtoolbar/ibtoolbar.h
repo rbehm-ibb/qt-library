@@ -12,8 +12,8 @@
 class IBToolBar : public QToolBar
 {
 	Q_OBJECT
-	Q_PROPERTY(bool m_maximzeV READ maximzeV WRITE setMaximzeV)
-	Q_PROPERTY(bool m_whatis READ whatis WRITE setWhatis)
+	Q_PROPERTY(bool maximizeV READ maximizeV WRITE setMaximizeV DESIGNABLE true)
+	Q_PROPERTY(bool whatis READ whatis WRITE setWhatis)
 public:
 	explicit IBToolBar(QWidget *parent = nullptr);
 	~IBToolBar();
@@ -21,8 +21,8 @@ public:
 	QAction *about();
 	virtual bool event(QEvent *e);
 
-	void setMaximzeV(bool newNoMaximzeV) { m_maximzeV = newNoMaximzeV; }
-	bool maximzeV() const { return m_maximzeV; }
+	void setMaximizeV(bool newMaximizeV) { m_maximizeV = newMaximizeV; }
+	bool maximizeV() const { return m_maximizeV; }
 
 	bool whatis() const { return m_whatis; }
 	void setWhatis(bool newWhatis) { m_whatis = newWhatis; }
@@ -37,7 +37,7 @@ private:
 	QAction *m_quit;
 	QAction *m_about;
 	bool m_whatis;
-	bool m_maximzeV;
+	bool m_maximizeV;
 
 	void addAbout();
 	void addQuit();

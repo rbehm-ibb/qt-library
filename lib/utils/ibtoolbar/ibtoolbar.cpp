@@ -13,7 +13,7 @@ IBToolBar::IBToolBar(QWidget *parent)
 	, m_about(nullptr)
 //	, m_what(nullptr)
 	, m_whatis(false)
-	, m_maximzeV(true)
+	, m_maximizeV(false)
 {
 	addQuit();
 }
@@ -21,25 +21,6 @@ IBToolBar::IBToolBar(QWidget *parent)
 IBToolBar::~IBToolBar()
 {
 }
-
-//QAction *IBToolBar::about()
-//{
-//	if (! m_about)
-//	{
-//		addAbout();
-//	}
-//	return m_about;
-//}
-
-//void IBToolBar::removeWhatis()
-//{
-//	if (m_what)
-//	{
-//		delete m_what;
-//		m_what = nullptr;
-//	}
-//	m_noWhat = true;
-//}
 
 bool IBToolBar::event(QEvent *e)
 {
@@ -54,8 +35,6 @@ bool IBToolBar::event(QEvent *e)
 	return QToolBar::event(e);
 }
 
-
-
 void IBToolBar::addAbout()
 {
 	QWidget *tbs = new QWidget;
@@ -67,7 +46,7 @@ void IBToolBar::addAbout()
 		addAction(m_what);
 		m_what->setStatusTip(tr("Whats this?"));
 	}
-	if (m_maximzeV)
+	if (m_maximizeV)
 	{
 		MaximizeV *mact = new MaximizeV(parentWidget());
 		addAction(mact);

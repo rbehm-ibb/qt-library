@@ -37,6 +37,12 @@
    <property name="windowTitle">
     <string>toolBar</string>
    </property>
+   <property name="maximzeV" stdset="0">
+    <bool>false</bool>
+   </property>
+   <property name="whatis" stdset="0">
+    <bool>false</bool>
+   </property>
    <attribute name="toolBarArea">
     <enum>TopToolBarArea</enum>
    </attribute>
