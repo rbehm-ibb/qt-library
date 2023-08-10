@@ -28,5 +28,5 @@ void MaximizeV::trigged()
 		msz.setHeight(sz.height());
 		mw->resize(msz);
 	}
-	setDisabled(true);
+//	setDisabled(true);
 }
