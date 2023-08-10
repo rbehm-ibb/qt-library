@@ -11,7 +11,7 @@ IBToolBar::IBToolBar(QWidget *parent)
 	: QToolBar(parent)
 	, m_quit(nullptr)
 	, m_about(nullptr)
-//	, m_what(nullptr)
+	, m_maxAct(nullptr)
 	, m_whatis(false)
 	, m_maximizeV(false)
 {
@@ -35,6 +35,14 @@ bool IBToolBar::event(QEvent *e)
 	return QToolBar::event(e);
 }
 
+void IBToolBar::maxV()
+{
+	if (m_maxAct)
+	{
+		m_maxAct->trigger();
+	}
+}
+
 void IBToolBar::addAbout()
 {
 	QWidget *tbs = new QWidget;
@@ -48,11 +56,11 @@ void IBToolBar::addAbout()
 	}
 	if (m_maximizeV)
 	{
-		MaximizeV *mact = new MaximizeV(parentWidget());
-		addAction(mact);
+		m_maxAct = new MaximizeV(parentWidget());
+		addAction(m_maxAct);
 	}
-	m_about = addAction(QIcon(":/toolbarspacer/info.svgz"), tr("&About"));
-//	m_about = addAction(QIcon(":/qt-project.org/styles/commonstyle/images/fileinfo-32.png"), tr("&About"));
+//	m_about = addAction(QIcon(":/toolbarspacer/info.svgz"), tr("&About"));
+	m_about = addAction(QIcon(":/qt-project.org/styles/commonstyle/images/fileinfo-32.png"), tr("&About"));
 	m_about->setToolTip(tr("Information about this program"));
 	m_about->setWhatsThis(tr("Information about this program"));
 	m_about->setStatusTip(tr("About this program"));

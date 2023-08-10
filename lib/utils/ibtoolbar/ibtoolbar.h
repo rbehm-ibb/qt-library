@@ -30,12 +30,14 @@ public:
 signals:
 
 public slots:
+	void maxV();
 private slots:
 	void aboutSlot();
 protected:
 private:
 	QAction *m_quit;
 	QAction *m_about;
+	QAction  *m_maxAct;
 	bool m_whatis;
 	bool m_maximizeV;
 

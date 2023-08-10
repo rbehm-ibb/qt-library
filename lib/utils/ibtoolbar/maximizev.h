@@ -15,7 +15,7 @@ class MaximizeV : public QAction
 	Q_OBJECT
 public:
 	explicit MaximizeV(QObject *parent = nullptr);
-private slots:
+public slots:
 	void trigged();
 };
 
