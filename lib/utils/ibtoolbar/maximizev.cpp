@@ -27,6 +27,6 @@ void MaximizeV::trigged()
 //		qDebug() << Q_FUNC_INFO << dt->screenNumber(mw) << dt->screenGeometry(mw) << dt->availableGeometry(mw) << sz;
 		msz.setHeight(sz.height());
 		mw->resize(msz);
-
 	}
+	setDisabled(true);
 }
