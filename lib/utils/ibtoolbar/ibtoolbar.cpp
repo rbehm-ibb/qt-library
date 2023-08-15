@@ -24,7 +24,6 @@ IBToolBar::~IBToolBar()
 
 bool IBToolBar::event(QEvent *e)
 {
-	//	qDebug() << Q_FUNC_INFO << e;
 	if (e->type() == QEvent::ChildPolished)
 	{
 		if (! m_about)
@@ -59,7 +58,6 @@ void IBToolBar::addAbout()
 		m_maxAct = new MaximizeV(parentWidget());
 		addAction(m_maxAct);
 	}
-//	m_about = addAction(QIcon(":/toolbarspacer/info.svgz"), tr("&About"));
 	m_about = addAction(QIcon(":/qt-project.org/styles/commonstyle/images/fileinfo-32.png"), tr("&About"));
 	m_about->setToolTip(tr("Information about this program"));
 	m_about->setWhatsThis(tr("Information about this program"));
