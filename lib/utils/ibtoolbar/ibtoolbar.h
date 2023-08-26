@@ -21,7 +21,7 @@ public:
 	QAction *about();
 	virtual bool event(QEvent *e);
 
-	void setMaximizeV(bool newMaximizeV) { m_maximizeV = newMaximizeV; }
+	void setMaximizeV(bool max) { m_maximizeV = max; }
 	bool maximizeV() const { return m_maximizeV; }
 
 	bool whatis() const { return m_whatis; }

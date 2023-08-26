@@ -37,7 +37,7 @@
    <property name="windowTitle">
     <string>toolBar</string>
    </property>
-   <property name="maximzeV" stdset="0">
+   <property name="maximizeV" stdset="0">
     <bool>false</bool>
    </property>
    <property name="whatis" stdset="0">
