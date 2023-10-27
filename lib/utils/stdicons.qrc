@@ -41,5 +41,6 @@
         <file>stdicons/datafilterstandardfilter.svg</file>
         <file>stdicons/eye.png</file>
         <file>stdicons/launch.svgz</file>
+        <file>stdicons/find.png</file>
     </qresource>
 </RCC>
