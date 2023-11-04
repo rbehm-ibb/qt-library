@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>text_bild.svgz</file>
+        <file>source_h.svgz</file>
+        <file>font.svgz</file>
+        <file>accept.png</file>
+    </qresource>
+</RCC>
