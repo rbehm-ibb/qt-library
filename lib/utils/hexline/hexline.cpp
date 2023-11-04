@@ -10,18 +10,22 @@ HexLine::HexLine(QWidget *parent)
 	: QLineEdit(parent)
 	, m_len(0)
 {
-	QAction *cpy = addAction(QIcon("://source_h.svgz"), QLineEdit::TrailingPosition);
+	QAction *actCpy = addAction(QIcon("://source_h.svgz"), QLineEdit::TrailingPosition);
 	QAction *ascCpy = addAction(QIcon("://font.svgz"), QLineEdit::TrailingPosition);
-	QAction *format = addAction(QIcon("://accept.png"), QLineEdit::TrailingPosition);
+	QAction *actFormat = addAction(QIcon("://accept.png"), QLineEdit::TrailingPosition);
+	actCpy->setToolTip(tr("Copy hex to clipboard as $$$$$"));
+	ascCpy->setToolTip(tr("Copy ascii to clipboard"));
+	actFormat->setToolTip(tr("Format the input to $$, $$..."));
+
 	setClearButtonEnabled(true);
 	QFont font;
 	font.setFamily(QString::fromUtf8("Oxygen Mono"));
 //	font.setPointSize(12);
 	setFont(font);
 //	connect(this, &QLineEdit::returnPressed, this, &HexLine::endEdit);
-	connect(cpy, &QAction::triggered, this, &HexLine::getHex);
+	connect(actCpy, &QAction::triggered, this, &HexLine::getHex);
 	connect(ascCpy, &QAction::triggered, this, &HexLine::getAscii);
-	connect(format, &QAction::triggered, this, &HexLine::endEdit);
+	connect(actFormat, &QAction::triggered, this, &HexLine::endEdit);
 }
 
 void HexLine::setData(ByteVector d)
