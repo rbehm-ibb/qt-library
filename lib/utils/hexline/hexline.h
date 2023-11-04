@@ -7,8 +7,6 @@
 #ifndef HEXLINE_H
 #define HEXLINE_H
 
-#include <QLineEdit>
-#include <QObject>
 #include "bytevector.h"
 
 class HexLine : public QLineEdit
