@@ -50,6 +50,12 @@ ByteVector HexLine::data()
 	return d;
 }
 
+void HexLine::setLen(int newLen)
+{
+//	qDebug() << Q_FUNC_INFO << newLen << objectName();
+	m_len = newLen;
+}
+
 void HexLine::endEdit()
 {
 	QString txt = text();

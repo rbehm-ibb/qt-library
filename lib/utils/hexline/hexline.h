@@ -11,6 +11,8 @@
 
 class HexLine : public QLineEdit
 {
+	Q_OBJECT
+	Q_PROPERTY(int len READ len WRITE setLen FINAL)
 public:
 	HexLine(QWidget *parent = nullptr);
 	void setData(ByteVector d);
@@ -19,10 +21,7 @@ public:
 	{
 		return m_len;
 	}
-	void setLen(int newLen)
-	{
-		m_len = newLen;
-	}
+	void setLen(int newLen);
 private slots:
 	void endEdit();
 	void getHex();
