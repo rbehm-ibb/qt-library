@@ -61,6 +61,7 @@ void HexLine::endEdit()
 	QString txt = text();
 	txt.replace("0x", "");
 	setText(QByteArray::fromHex(txt.toLocal8Bit()).toHex(','));
+	data();
 }
 
 void HexLine::getHex()
