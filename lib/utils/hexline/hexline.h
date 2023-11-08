@@ -16,6 +16,7 @@ class HexLine : public QLineEdit
 public:
 	HexLine(QWidget *parent = nullptr);
 	void setData(ByteVector d);
+	void setData(const QString s) { setText(s); endEdit(); }
 	ByteVector data();
 	int len() const
 	{
