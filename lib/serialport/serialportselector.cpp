@@ -9,6 +9,11 @@
 SerialPortSelector::SerialPortSelector(QWidget *parent)
 	: QComboBox(parent)
 {
+	setSizeAdjustPolicy(QComboBox::AdjustToContents);
+	QAction *refr = new QAction(QIcon("://stdicons/arrow_refresh.png"), "Refresh", this);
+	setContextMenuPolicy(Qt::ActionsContextMenu);
+	addAction(refr);
+	connect(refr, &QAction::triggered, this, &SerialPortSelector::refresh);
 	refresh();
 }
 
