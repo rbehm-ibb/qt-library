@@ -14,6 +14,8 @@ SerialPortSelector::SerialPortSelector(QWidget *parent)
 	setContextMenuPolicy(Qt::ActionsContextMenu);
 	addAction(refr);
 	connect(refr, &QAction::triggered, this, &SerialPortSelector::refresh);
+//	connect(this, &QComboBox::currentIndexChanged, this, &SerialPortSelector::on_currentIndexChanged);
+	connect(this, SIGNAL(currentIndexChanged(int)), this, SLOT(on_currentIndexChanged(int)));
 	refresh();
 }
 
@@ -29,7 +31,6 @@ void SerialPortSelector::init(const QString port)
 		setCurrentIndex(idx);
 	}
 	emit portChanged(portname());
-	connect(this, SIGNAL(currentIndexChanged(int)), this, SLOT(on_currentIndexChanged(int)));
 }
 
 QString SerialPortSelector::portname() const
