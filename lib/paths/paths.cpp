@@ -22,8 +22,8 @@ Paths::Paths(QObject *parent)
 		// qDebug() << Q_FUNC_INFO << ">>>>>>>>>>" << m_dir.absolutePath() << m_dir.exists();
 		if (! m_dir.exists())
 		{
-			bool rc = m_dir.mkpath(m_dir.absolutePath());
-			qDebug() << Q_FUNC_INFO << ">>>>>>>>>>" << rc;
+			/*bool rc = */m_dir.mkpath(m_dir.absolutePath());
+			// qDebug() << Q_FUNC_INFO << ">>>>>>>>>>" << rc;
 		}
 	}
 	else if (tmp.isEmpty())
@@ -33,11 +33,19 @@ Paths::Paths(QObject *parent)
 	m_dir = QDir(tmp);
 }
 
-Paths::~Paths() {}
+bool Paths::ok()
+{
+	return i()->m_dir.exists();
+}
 
-bool Paths::mkdir(QString name)
+bool Paths::mkdir(const QString &name)
 {
 	return i()->m_dir.mkdir(name);
+}
+
+bool Paths::ok(const QString &name)
+{
+	return i()->m_dir.exists(name);
 }
 
 Paths *Paths::i()

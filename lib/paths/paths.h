@@ -10,11 +10,12 @@
 class Paths : public QObject
 {
 public:
-	~Paths();
+	static bool ok();
 	static QDir dataDir() { return i()->m_dir; }
 	static QString dataDirname() { return dataDir().absolutePath(); }
-	static QString filename(QString name);
-	static bool mkdir(QString name);
+	static QString filename(const QString &name) { return dataDir().absoluteFilePath(name); }
+	static bool mkdir(const QString &name);
+	static bool ok(const QString &name);
 private:
 	Paths(QObject *parent);
 	static Paths *i();
