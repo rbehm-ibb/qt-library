@@ -11,8 +11,8 @@ Config *Config::instance = nullptr;
 Config::Config(QObject *parent)
 	: QObject(parent)
 {
-//	m_conf = new QSettings(QSettings::UserScope, qApp->organizationName(), qApp->applicationName(), this);
-	m_conf = new QSettings(qApp->applicationDirPath() + "/" + qApp->applicationName() + ".rc", QSettings::IniFormat, this);
+	m_conf = new QSettings(QSettings::UserScope, qApp->organizationName(), qApp->applicationName(), this);
+	// m_conf = new QSettings(qApp->applicationDirPath() + "/" + qApp->applicationName() + ".rc", QSettings::IniFormat, this);
 	instance = this;
 //	qDebug() << Q_FUNC_INFO << m_conf->fileName();
 }
