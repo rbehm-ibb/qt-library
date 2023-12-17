@@ -28,6 +28,12 @@ void Config::load(QWidget *conf)
 			le->setText(Config::stringValue(name));
 			continue;
 		}
+		QTextEdit *te = qobject_cast<QTextEdit*>(w);
+		if (te)
+		{
+			te->setPlainText(Config::stringValue(name));
+			continue;
+		}
 		QAbstractButton *rb = qobject_cast<QAbstractButton*>(w);
 		if (rb)
 		{
@@ -68,16 +74,23 @@ void Config::save(QWidget *conf)
 		{
 			continue;
 		}
+		// qDebug() << Q_FUNC_INFO << name;
 		if (w->inherits("QLineEditIconButton") || w->inherits("QGroupBox"))
 		{
 			continue;
 		}
 		name.prepend(conf->objectName() + "/");
-//		qDebug() << Q_FUNC_INFO << w << name;
+		// qDebug() << Q_FUNC_INFO << w << name;
 		QLineEdit *le = qobject_cast<QLineEdit*>(w);
 		if (le)
 		{
 			Config::setValue(name, le->text());
+			continue;
+		}
+		QTextEdit *te = qobject_cast<QTextEdit*>(w);
+		if (te)
+		{
+			Config::setValue(name, te->toPlainText());
 			continue;
 		}
 		QAbstractButton *rb = qobject_cast<QAbstractButton*>(w);
