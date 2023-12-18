@@ -83,9 +83,27 @@ void IBSerialPortLine::sendLine(const QByteArray &line)
 	else
 #endif
 	{
-		write(m_bol);
-		write(line);
-		write(m_eol);
+		QByteArray sl;
+		sl.append(m_bol);
+		sl.append(line);
+		sl.append(m_eol);
+		qDebug() << Q_FUNC_INFO << sl.toHex(',');
+#if 1
+		write(sl);
+#else
+		foreach (const char &c, sl)
+		{
+			write(&c, 1);
+			waitForBytesWritten();
+			using namespace std::chrono;using namespace std::this_thread;
+			cout << c << flush();
+			usleep(3L*1000L);
+//			usleep(100000);
+		}
+#endif
+		// write(m_bol);
+		// write(line);
+		// write(m_eol);
 	}
 }
 
