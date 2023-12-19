@@ -61,7 +61,7 @@ void WebServer::newConnection()
 		}
 		else
 		{
-			qWarning() << Q_FUNC_INFO << "Unknown reseource" << QUrl(socket->resourceName()).fileName();
+			qWarning() << Q_FUNC_INFO << "Unknown resource" << QUrl(socket->resourceName()).fileName();
 			delete socket;
 		}
 	}

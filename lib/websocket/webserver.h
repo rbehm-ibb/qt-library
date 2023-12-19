@@ -17,6 +17,8 @@ public:
 	~WebServer();
 	void addResource(WebResource *rsc);
 	void close();
+	QString name() const { return m_server->serverName(); }
+	uint16_t port() const  { return m_server->serverPort(); }
 signals:
 
 public slots:
