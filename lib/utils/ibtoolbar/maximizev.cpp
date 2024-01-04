@@ -18,11 +18,11 @@ MaximizeV::MaximizeV(QObject *parent)
 void MaximizeV::trigged()
 {
 //	qDebug() << Q_FUNC_INFO << this << this->parentWidget();
-	QMainWindow *mw = qobject_cast<QMainWindow*>(this->parentWidget());
+	QMainWindow *mw = qobject_cast<QMainWindow*>(this->parent());
 	if (mw)
 	{
-		QDesktopWidget *dt = qApp->desktop();
-		QSize sz = dt->screenGeometry(mw).size();
+		QScreen *dt = qApp->primaryScreen();
+		QSize sz = dt->availableGeometry().size();
 		QSize msz = mw->size();
 //		qDebug() << Q_FUNC_INFO << dt->screenNumber(mw) << dt->screenGeometry(mw) << dt->availableGeometry(mw) << sz;
 		msz.setHeight(sz.height());
