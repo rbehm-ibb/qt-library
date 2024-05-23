@@ -20,6 +20,8 @@ public:
 	int watchtime() const { return m_watchtime; }
 	void setWatchtime(int newWatchtime);
 
+	StreamLineFilter *filter() const { return m_filter; }
+
 signals:
 	void lineRxd(const QByteArray line, const QHostAddress src);
 	void closedClient(const QHostAddress &peer);

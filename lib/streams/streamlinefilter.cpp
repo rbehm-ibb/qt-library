@@ -50,6 +50,7 @@ void StreamLineFilter::sendLine(const QByteArray &line)
 void StreamLineFilter::readRxdDataSlot()
 {
 	QByteArray rx = m_dev->readAll();
+	qDebug() << Q_FUNC_INFO << rx;
 	if (! rx.isEmpty())
 	{
 		m_rxdData += rx;

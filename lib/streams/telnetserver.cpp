@@ -11,10 +11,10 @@
 TelnetServer::TelnetServer(QObject *parent)
 	: QTcpServer(parent)
 	, m_maxClients(10)
-	, m_timeout(10)
+	, m_timeout(Config::intValue("server/timeout", 10))
 {
 	QHostAddress::SpecialAddress type = QHostAddress::Any;
-	QString confType = Config::stringValue("server/type", "anyipv4").toLower();
+	QString confType = Config::stringValue("server/type", "any").toLower();
 	if (confType == "any")
 	{
 		type = QHostAddress::Any;
@@ -32,14 +32,18 @@ TelnetServer::TelnetServer(QObject *parent)
 	{
 		qWarning() << Q_FUNC_INFO << port << errorString();
 	}
+
+	qDebug() << Q_FUNC_INFO << port << type << m_timeout;
 }
 
 
 void TelnetServer::incomingConnection(qintptr handle)
 {
+	qDebug() << Q_FUNC_INFO;
 	if (findChildren<TelnetSocket*>().count() < m_maxClients)
 	{
 		TelnetSocket *sock = new TelnetSocket(handle, this);
+		sock->setWatchtime(m_timeout);
 		connect(sock, &TelnetSocket::lineRxd, this, &TelnetServer::lineRxd);
 		connect(sock, &TelnetSocket::closedClient, this, &TelnetServer::closedClient);
 		connect(this, &TelnetServer::sendSig, sock, &TelnetSocket::send);
