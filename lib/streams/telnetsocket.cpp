@@ -16,7 +16,8 @@ TelnetSocket::TelnetSocket(qintptr sock, QObject *parent)
 	setSocketDescriptor(sock);
 	m_peer = peerAddress();
 	connect(this, &QTcpSocket::disconnected, this, &TelnetSocket::disconnectedSlot);
-	connect(m_watch, &QTimer::timeout, this, &QTcpSocket::close);
+	// connect(m_watch, &QTimer::timeout, this, &QTcpSocket::close);
+	connect(m_watch, &QTimer::timeout, this, &TelnetSocket::timeout);
 	m_watch->start(m_watchtime);
 	m_filter = new StreamLineFilter(this, this);
 	connect(m_filter, &StreamLineFilter::lineRxd, this, &TelnetSocket::lineRxdSlot);
@@ -41,7 +42,10 @@ void TelnetSocket::lineRxdSlot(StreamLineFilter *filter)
 	// qDebug() << Q_FUNC_INFO << m_peer;
 	while (filter->canReadLine())
 	{
-		m_watch->start(m_watchtime);
+		if (m_watchtime)
+		{
+			m_watch->start(m_watchtime);
+		}
 		const QByteArray line = filter->readLine();
 		if (line == "!quit")
 		{
@@ -57,8 +61,22 @@ void TelnetSocket::disconnectedSlot()
 	deleteLater();
 }
 
+void TelnetSocket::timeout()
+{
+	 qDebug() << Q_FUNC_INFO;
+	 close();
+}
+
 void TelnetSocket::setWatchtime(int newWatchtime)
 {
+	qDebug() << Q_FUNC_INFO << newWatchtime;
 	m_watchtime = newWatchtime*1000;
-	m_watch->start(m_watchtime);
+	if (m_watchtime)
+	{
+		m_watch->start(m_watchtime);
+	}
+	else
+	{
+		m_watch->stop();
+	}
 }

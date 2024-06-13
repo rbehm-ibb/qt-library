@@ -7,6 +7,7 @@
 #include "telnetserver.h"
 #include "telnetsocket.h"
 #include "config.h"
+#include "zconfdef.h"
 
 TelnetServer::TelnetServer(QObject *parent)
 	: QTcpServer(parent)
@@ -27,7 +28,7 @@ TelnetServer::TelnetServer(QObject *parent)
 	{
 		type = QHostAddress::AnyIPv6;
 	}
-	quint16 port = Config::intValue("server/port", 5400);
+	constexpr quint16 port = ZConfDef::tcpLogPort();
 	if (! listen(type, port))
 	{
 		qWarning() << Q_FUNC_INFO << port << errorString();

@@ -30,6 +30,7 @@ public slots:
 private slots:
 	void lineRxdSlot(StreamLineFilter *filter);
 	void disconnectedSlot();
+	void timeout();
 private:
 	QHostAddress m_peer;
 	StreamLineFilter *m_filter;

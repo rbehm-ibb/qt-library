@@ -129,6 +129,6 @@ void StreamLineFilter::rxTimeoutSlot()
 		qWarning() << Q_FUNC_INFO << objectName() << m_hadBol << m_rxdData;
 		m_hadBol = false;
 		m_rxdData.clear();
-		emit rxTimeout();
+		// emit rxTimeout();
 	}
 }
